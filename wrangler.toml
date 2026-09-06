@@ -1,0 +1,7 @@
+name = "literary-heal"
+compatibility_date = "2024-09-01"
+pages_build_output_dir = "dist"
+
+# 不放 secrets 到 wrangler.toml，请用：
+#   wrangler pages secret put DASHSCOPE_API_KEY
+# 或在 Cloudflare Dashboard → Pages → Settings → Environment variables 设置

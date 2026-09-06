@@ -1,0 +1,10 @@
+# Cloudflare Pages 不读取的文件
+node_modules
+dist
+.git
+.env
+.env.local
+.wrangler
+*.log
+
+# 但要包含 functions 目录（默认就包含）
