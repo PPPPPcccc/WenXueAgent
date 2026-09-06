@@ -1,0 +1,210 @@
+[
+  {
+    "id": "c_lunyu_zihan_19",
+    "book": "论语",
+    "chapter": "子罕·第十九章",
+    "quote": "譬如为山，未成一篑，止，吾止也；譬如平地，虽覆一篑，进，吾往也",
+    "tags": ["坚持", "努力", "半途而废"],
+    "char_count": 30
+  },
+  {
+    "id": "c_lunyu_shuier_7",
+    "book": "论语",
+    "chapter": "述而第七",
+    "quote": "三人行，必有我师焉",
+    "tags": ["谦逊", "学习"],
+    "char_count": 8
+  },
+  {
+    "id": "c_lunyu_liren_4",
+    "book": "论语",
+    "chapter": "里仁第四",
+    "quote": "君子欲讷于言而敏于行",
+    "tags": ["行动", "慎言"],
+    "char_count": 11
+  },
+  {
+    "id": "c_mengzi_gaozi_xia",
+    "book": "孟子",
+    "chapter": "告子下",
+    "quote": "故天将降大任于是人也，必先苦其心志",
+    "tags": ["担当", "磨炼"],
+    "char_count": 16
+  },
+  {
+    "id": "c_shijing_weifeng_qiyao",
+    "book": "诗经",
+    "chapter": "卫风·淇奥",
+    "quote": "有匪君子，如切如磋，如琢如磨",
+    "tags": ["修养", "自省"],
+    "char_count": 14
+  },
+  {
+    "id": "c_zhuangzi_xiaoyao",
+    "book": "庄子",
+    "chapter": "逍遥游",
+    "quote": "且举世誉之而不加劝，举世非之而不加沮",
+    "tags": ["平和", "自我"],
+    "char_count": 18
+  },
+  {
+    "id": "c_xunzi_quanxue",
+    "book": "荀子",
+    "chapter": "劝学",
+    "quote": "驽马十驾，功在不舍",
+    "tags": ["坚持", "积累"],
+    "char_count": 9
+  },
+  {
+    "id": "c_zuozhuan_xianggong_24",
+    "book": "左传",
+    "chapter": "襄公二十四年",
+    "quote": "太上有立德，其次有立功，其次有立言",
+    "tags": ["价值", "志向"],
+    "char_count": 15
+  },
+  {
+    "id": "c_shangshu_yushu_dayu",
+    "book": "尚书",
+    "chapter": "虞书·大禹谟",
+    "quote": "满招损，谦受益",
+    "tags": ["谦逊", "自省"],
+    "char_count": 7
+  },
+  {
+    "id": "c_lunyu_zheng_2",
+    "book": "论语",
+    "chapter": "为政第二",
+    "quote": "学而不思则罔，思而不学则殆",
+    "tags": ["学习", "思考"],
+    "char_count": 12
+  },
+  {
+    "id": "c_liji_zhongyong",
+    "book": "礼记",
+    "chapter": "中庸",
+    "quote": "博学之，审问之，慎思之，明辨之，笃行之",
+    "tags": ["学习", "行动"],
+    "char_count": 16
+  },
+  {
+    "id": "c_laozi_81",
+    "book": "老子",
+    "chapter": "第八十一章",
+    "quote": "天之道，利而不害；圣人之道，为而不争",
+    "tags": ["平和", "智慧"],
+    "char_count": 17
+  },
+  {
+    "id": "c_lunyu_xueer_1",
+    "book": "论语",
+    "chapter": "学而第一",
+    "quote": "学而时习之，不亦说乎",
+    "tags": ["学习", "愉悦"],
+    "char_count": 9
+  },
+  {
+    "id": "c_lunyu_weizheng_15",
+    "book": "论语",
+    "chapter": "为政第二",
+    "quote": "见贤思齐焉，见不贤而内自省也",
+    "tags": ["自省", "学习"],
+    "char_count": 13
+  },
+  {
+    "id": "c_lunyu_yongye_12",
+    "book": "论语",
+    "chapter": "雍也第十二",
+    "quote": "知之者不如好之者，好之者不如乐之者",
+    "tags": ["学习", "热爱"],
+    "char_count": 15
+  },
+  {
+    "id": "c_mengzi_jinxin_1",
+    "book": "孟子",
+    "chapter": "尽心下",
+    "quote": "穷则独善其身，达则兼善天下",
+    "tags": ["自我", "志向"],
+    "char_count": 12
+  },
+  {
+    "id": "c_shijing_zhougong_zaoyi",
+    "book": "诗经",
+    "chapter": "周南·召南",
+    "quote": "窈窕淑女，君子好逑",
+    "tags": ["爱情", "美好"],
+    "char_count": 8
+  },
+  {
+    "id": "c_caocao_jiangjia",
+    "book": "曹操诗",
+    "chapter": "短歌行",
+    "quote": "老骥伏枥，志在千里；烈士暮年，壮心不已",
+    "tags": ["志向", "坚持"],
+    "char_count": 16
+  },
+  {
+    "id": "c_li_bai_jiangjinjiu",
+    "book": "李白诗",
+    "chapter": "将进酒",
+    "quote": "天生我材必有用，千金散尽还复来",
+    "tags": ["自信", "豪迈"],
+    "char_count": 14
+  },
+  {
+    "id": "c_wang_wei_songyuan",
+    "book": "王维诗",
+    "chapter": "送元二使安西",
+    "quote": "劝君更尽一杯酒，西出阳关无故人",
+    "tags": ["友情", "离别"],
+    "char_count": 14
+  },
+  {
+    "id": "c_su_shi_chibi",
+    "book": "苏轼词",
+    "chapter": "念奴娇·赤壁怀古",
+    "quote": "人生如梦，一尊还酹江月",
+    "tags": ["平和", "释然"],
+    "char_count": 10
+  },
+  {
+    "id": "c_bai_juyi_caizi",
+    "book": "白居易诗",
+    "chapter": "赋得古原草送别",
+    "quote": "野火烧不尽，春风吹又生",
+    "tags": ["坚持", "希望"],
+    "char_count": 10
+  },
+  {
+    "id": "c_du_fu_chunwang",
+    "book": "杜甫诗",
+    "chapter": "春望",
+    "quote": "国破山河在，城春草木深",
+    "tags": ["家国", "坚韧"],
+    "char_count": 10
+  },
+  {
+    "id": "c_lunyu_yan_yuan_12",
+    "book": "论语",
+    "chapter": "颜渊第十二",
+    "quote": "君子成人之美，不成人之恶",
+    "tags": ["修养", "善良"],
+    "char_count": 11
+  },
+  {
+    "id": "c_daodejing_33",
+    "book": "道德经",
+    "chapter": "第三十三章",
+    "quote": "知人者智，自知者明；胜人者有力，自胜者强",
+    "tags": ["自我", "智慧"],
+    "char_count": 17
+  },
+  {
+    "id": "c_zhongyong_20",
+    "book": "中庸",
+    "chapter": "第二十章",
+    "quote": "博学之，审问之，慎思之，明辨之，笃行之",
+    "tags": ["学习", "实践"],
+    "char_count": 16
+  }
+]
