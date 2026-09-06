@@ -2,16 +2,16 @@
   <header class="app-header">
     <div class="header-inner app-container">
       <router-link to="/" class="brand">
-        <span class="brand-seal">文心</span>
+        <span class="brand-seal">此刻</span>
         <div class="brand-text">
-          <h1 class="brand-title">文心疗愈</h1>
-          <p class="brand-sub">Literary Heal</p>
+          <h1 class="brand-title">此刻</h1>
+          <p class="brand-sub">Hic et Nunc</p>
         </div>
       </router-link>
 
       <nav class="nav">
         <router-link to="/" class="nav-link" exact>
-          <span class="nav-zh">问心</span>
+          <span class="nav-zh">此刻</span>
           <span class="nav-en">Chat</span>
         </router-link>
         <router-link to="/history" class="nav-link">

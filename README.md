@@ -1,4 +1,4 @@
-# 文心疗愈 · 一次代码，两个平台
+# 此刻 · Hic et Nunc — 一次代码，两个平台
 
 基于通义千问（qwen-plus）与中华典籍的情绪疗愈 Web 应用 — **Vercel / Cloudflare Pages 双部署**。
 

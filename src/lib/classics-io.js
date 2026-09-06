@@ -60,7 +60,7 @@ export function toLine(c) {
   return `${c.book}|${c.chapter}|${c.quote}|${tags}`
 }
 
-export function exportText(classics, headerComment = '# 文心疗愈 - 典籍库\n# 格式：书名|章节|名句|标签1,标签2') {
+export function exportText(classics, headerComment = '# 此刻 - 典籍库\n# 格式：书名|章节|名句|标签1,标签2') {
   const lines = [headerComment]
   for (const c of classics) lines.push(toLine(c))
   return lines.join('\n') + '\n'

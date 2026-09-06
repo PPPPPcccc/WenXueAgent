@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "文心疗愈 - Vercel 部署版（纯前端 + Serverless）",
+  "description": "此刻 · Hic et Nunc - Vercel / Cloudflare Pages 部署版（纯前端 + Serverless）",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

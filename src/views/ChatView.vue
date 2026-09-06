@@ -3,7 +3,7 @@
     <MountainDeco />
 
     <header class="page-header ink-spread-in">
-      <h2 class="page-title">问心 · 静听</h2>
+      <h2 class="page-title">此时 · 此刻</h2>
       <p class="page-subtitle">写下你此刻的心境，典籍自有回应。</p>
     </header>
 
