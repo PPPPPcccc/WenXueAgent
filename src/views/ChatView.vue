@@ -112,9 +112,7 @@ const onSend = async () => {
       id: data.id || `a-${Date.now()}`,
       role: 'assistant',
       part1: data.part1,
-      part2: data.part2,
-      part3: data.part3,
-      part2_source: data.part2_source,
+      quotes: data.quotes || [],
       model: data.model,
       is_favorite: false,
       time: data.created_at || new Date().toISOString(),
@@ -125,9 +123,7 @@ const onSend = async () => {
       id: msg.id,
       user_input: text,
       part1: msg.part1,
-      part2: msg.part2,
-      part3: msg.part3,
-      part2_source: msg.part2_source,
+      quotes: msg.quotes,
       model: msg.model,
     })
     scrollToBottom()
@@ -136,8 +132,7 @@ const onSend = async () => {
       id: `e-${Date.now()}`,
       role: 'assistant',
       part1: '（连接中断，请稍后再试）',
-      part2: '—',
-      part3: err.message || '未知错误',
+      quotes: [{ quote: '—', source: '', interpretation: err.message || '未知错误', matched: null }],
       model: 'error',
       time: new Date().toISOString(),
     })

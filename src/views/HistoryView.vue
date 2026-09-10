@@ -57,15 +57,16 @@
           <p>{{ item.part1 }}</p>
         </section>
 
-        <section class="history-part quote-part">
-          <span class="part-tag">贰</span>
-          <p>{{ item.part2 }}</p>
-        </section>
-
-        <section class="history-part insight-part">
-          <span class="part-tag">叁</span>
-          <p>{{ item.part3 }}</p>
-        </section>
+        <template v-if="getQuotes(item).length">
+          <section class="history-part quote-part" v-for="(q, qi) in getQuotes(item)" :key="qi">
+            <span class="part-tag" :style="qi === 0 ? '' : 'opacity:0'">{{ qi === 0 ? '贰' : '' }}</span>
+            <div class="quote-block">
+              <p class="history-quote-text">{{ q.quote }}</p>
+              <p class="history-quote-meta">{{ q.interpretation }}</p>
+              <p class="history-quote-source">{{ q.source }}</p>
+            </div>
+          </section>
+        </template>
 
         <p class="model-meta">— 由 {{ item.model || 'qwen-plus' }} 回答 · 本机保存</p>
       </article>
@@ -93,6 +94,13 @@ const formatTime = (iso) => {
   if (!iso) return ''
   const d = new Date(iso)
   return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
+}
+
+function getQuotes(item) {
+  if (Array.isArray(item.quotes)) return item.quotes
+  // 兼容旧格式
+  if (item.part2) return [{ quote: item.part2, source: item.part2_source || '', interpretation: item.part3 || '', matched: null }]
+  return []
 }
 
 const load = () => {
@@ -274,12 +282,34 @@ onMounted(load)
   font-size: 12px;
 }
 
-.quote-part p {
+.quote-block {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.history-quote-text {
   font-size: 15px;
   font-weight: 500;
   color: var(--ink-100);
   border-left: 2px solid var(--vermilion);
   padding-left: 10px;
+  line-height: 1.6;
+}
+
+.history-quote-meta {
+  font-size: 13px;
+  color: var(--ink-50);
+  font-style: italic;
+  padding-left: 22px;
+}
+
+.history-quote-source {
+  font-size: 11px;
+  color: var(--ink-40);
+  padding-left: 22px;
+  letter-spacing: 0.08em;
 }
 
 .insight-part p {
