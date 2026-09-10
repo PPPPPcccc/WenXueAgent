@@ -11,7 +11,7 @@
 
     <div class="ink-divider"></div>
 
-    <!-- 贰 · 典籍名句（4 卡片切换） -->
+    <!-- 贰 · 典籍名句 + 情境解读（选中引用 + 解读一体化） -->
     <section class="reply-part part-2 ink-spread-in" style="animation-delay: 0.1s;">
       <div class="part-header">
         <span class="part-label">贰 · 典籍名句</span>
@@ -26,10 +26,23 @@
         <p class="quote-source" v-if="activeQuote.source">
           —— {{ activeQuote.source }}
         </p>
+        <!-- 情境解读（紧跟选中引用，位于卡片上方） -->
+        <p class="quote-interpretation" v-if="activeQuote.interpretation">
+          {{ activeQuote.interpretation }}
+        </p>
       </div>
+    </section>
 
-      <!-- 4 卡片切换 -->
-      <div class="quotes-grid" v-if="reply.quotes && reply.quotes.length">
+    <div class="ink-divider"></div>
+
+    <!-- 叁 · 古人各异（4 卡片切换展示不同古人答案） -->
+    <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="reply.quotes && reply.quotes.length">
+      <div class="part-header">
+        <span class="part-label">叁 · 古人各异</span>
+        <span class="part-seal">Plural Answers</span>
+      </div>
+      <p class="plural-hint" v-if="!hidePluralHint">同一个问题，古人没有同一个答案。</p>
+      <div class="quotes-grid">
         <button
           v-for="(q, i) in reply.quotes"
           :key="i"
@@ -42,17 +55,6 @@
           <span class="quote-card-preview">{{ q.quote.slice(0, 12) }}{{ q.quote.length > 12 ? '…' : '' }}</span>
         </button>
       </div>
-    </section>
-
-    <div class="ink-divider"></div>
-
-    <!-- 叁 · 轻量情境解读（独立模块，跟随卡片切换） -->
-    <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="activeQuote && activeQuote.interpretation">
-      <div class="part-header">
-        <span class="part-label">叁 · 情境解读</span>
-        <span class="part-seal">Insight</span>
-      </div>
-      <p class="part-content part3-text">{{ activeQuote.interpretation }}</p>
     </section>
 
     <div class="reply-actions" v-if="showActions">
@@ -71,6 +73,7 @@ import { ref, computed, watch } from 'vue'
 const props = defineProps({
   reply: { type: Object, required: true },
   showActions: { type: Boolean, default: false },
+  hidePluralHint: { type: Boolean, default: false },
 })
 defineEmits(['favorite', 'delete'])
 
@@ -151,7 +154,7 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 /* ===== 选中引用展示 ===== */
 .selected-quote-wrap {
-  margin-bottom: 16px;
+  margin-bottom: 0;
 }
 
 .selected-quote {
@@ -205,7 +208,31 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   letter-spacing: 0.1em;
 }
 
-/* ===== 4 卡片切换 ===== */
+/* ===== 情境解读（紧跟引用，位于卡片上方） ===== */
+.quote-interpretation {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background: rgba(176, 140, 60, 0.06);
+  border-left: 3px solid var(--ochre);
+  border-radius: 0 4px 4px 0;
+  font-size: 13.5px;
+  color: var(--ink-60);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.75;
+}
+
+/* ===== 叁 · 古人各异（4 卡片） ===== */
+.plural-hint {
+  font-family: 'Noto Serif SC', serif;
+  font-size: 13px;
+  color: var(--ink-40);
+  letter-spacing: 0.15em;
+  font-style: italic;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
 .quotes-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -284,33 +311,6 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 .quote-card-btn.active .quote-card-preview {
   color: var(--ink-60);
-}
-
-/* ===== 叁 · 情境解读（独立模块） ===== */
-.part-3 {
-  background: rgba(176, 140, 60, 0.04);
-  border-left: 3px solid var(--ochre);
-  border-radius: 4px;
-  padding: 12px 16px;
-  margin-top: 4px;
-}
-
-.part-3 .part-label {
-  color: var(--ochre);
-}
-
-.part-3 .part-seal {
-  color: var(--ochre);
-  opacity: 0.6;
-}
-
-.part3-text {
-  font-size: 14px;
-  color: var(--ink-60);
-  font-style: italic;
-  letter-spacing: 0.04em;
-  line-height: 1.75;
-  margin: 0;
 }
 
 /* ===== 操作按钮 ===== */

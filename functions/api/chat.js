@@ -39,6 +39,10 @@ export async function onRequestPost(context) {
       apiKey: env.DASHSCOPE_API_KEY,
       model: env.LLM_MODEL || 'qwen-plus',
       classics,
+      // RAG 配置：URL 指向 public/ 下的二进制 embeddings；缺失会自动回退到规则匹配
+      embeddingsUrl: env.RAG_EMBEDDINGS_URL || '/data/classics_embeddings.f16.bin',
+      embeddingDim: Number(env.RAG_EMBEDDING_DIM) || 1024,
+      useRag: env.RAG_ENABLED !== 'false',  // 默认启用
     })
     return jsonResponse(status, out)
   } catch (err) {
