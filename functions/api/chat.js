@@ -34,13 +34,19 @@ export async function onRequestPost(context) {
   if (content.length > 500) return jsonResponse(400, { error: '内容过长（>500 字）' })
 
   try {
+    // 把相对 URL 转为绝对 URL（Cloudflare workerd 中 fetch 不支持相对路径）
+    const origin = new URL(request.url).origin
+    const absEmbeddingsUrl = embeddingsUrl?.startsWith('/')
+      ? `${origin}${embeddingsUrl}`
+      : embeddingsUrl
+
     const { status, body: out } = await handleChat({
       userInput: content,
       apiKey: env.DASHSCOPE_API_KEY,
       model: env.LLM_MODEL || 'qwen-plus',
       classics,
       // RAG 配置：URL 指向 public/ 下的二进制 embeddings；缺失会自动回退到规则匹配
-      embeddingsUrl: env.RAG_EMBEDDINGS_URL || '/data/classics_embeddings.f16.bin',
+      embeddingsUrl: absEmbeddingsUrl,
       embeddingDim: Number(env.RAG_EMBEDDING_DIM) || 1024,
       useRag: env.RAG_ENABLED !== 'false',  // 默认启用
     })
