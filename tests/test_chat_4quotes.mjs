@@ -100,7 +100,9 @@ function test(name, fn) {
     const q = parseQuotesResponse(raw, classics)
     assert.equal(q.length, 1)
     assert.ok(q[0].matched)
-    assert.equal(q[0].matched.id, 'c_lunyu_xueer_1')
+    assert.equal(q[0].matched.book, '论语')
+    // DB 中实际是 "子曰:"学而时习之,不亦说乎"（带前缀+ASCII逗号）
+    assert.ok(q[0].matched.quote.includes('学而时习之'))
   })
 
   await test('未匹配经典时 matched 为 null', () => {

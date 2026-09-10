@@ -23,9 +23,6 @@
         <blockquote class="selected-quote">
           <span class="quote-text">{{ activeQuote.quote }}</span>
         </blockquote>
-        <p class="quote-interpretation" v-if="activeQuote.interpretation">
-          {{ activeQuote.interpretation }}
-        </p>
         <p class="quote-source" v-if="activeQuote.source">
           —— {{ activeQuote.source }}
         </p>
@@ -49,9 +46,13 @@
 
     <div class="ink-divider"></div>
 
-    <!-- 叁 · 轻量情境解读（随卡片联动） -->
-    <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="false">
-      <!-- 已整合到卡片中，此处保留结构兼容旧数据 -->
+    <!-- 叁 · 轻量情境解读（独立模块，跟随卡片切换） -->
+    <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="activeQuote && activeQuote.interpretation">
+      <div class="part-header">
+        <span class="part-label">叁 · 情境解读</span>
+        <span class="part-seal">Insight</span>
+      </div>
+      <p class="part-content part3-text">{{ activeQuote.interpretation }}</p>
     </section>
 
     <div class="reply-actions" v-if="showActions">
@@ -150,7 +151,7 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 /* ===== 选中引用展示 ===== */
 .selected-quote-wrap {
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
 
 .selected-quote {
@@ -194,16 +195,6 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   display: block;
   position: relative;
   z-index: 1;
-}
-
-.quote-interpretation {
-  font-size: 13px;
-  color: var(--ink-50);
-  margin-top: 10px;
-  padding-left: 28px;
-  font-style: italic;
-  letter-spacing: 0.04em;
-  line-height: 1.6;
 }
 
 .quote-source {
@@ -293,6 +284,33 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 .quote-card-btn.active .quote-card-preview {
   color: var(--ink-60);
+}
+
+/* ===== 叁 · 情境解读（独立模块） ===== */
+.part-3 {
+  background: rgba(176, 140, 60, 0.04);
+  border-left: 3px solid var(--ochre);
+  border-radius: 4px;
+  padding: 12px 16px;
+  margin-top: 4px;
+}
+
+.part-3 .part-label {
+  color: var(--ochre);
+}
+
+.part-3 .part-seal {
+  color: var(--ochre);
+  opacity: 0.6;
+}
+
+.part3-text {
+  font-size: 14px;
+  color: var(--ink-60);
+  font-style: italic;
+  letter-spacing: 0.04em;
+  line-height: 1.75;
+  margin: 0;
 }
 
 /* ===== 操作按钮 ===== */
