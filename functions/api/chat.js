@@ -36,9 +36,10 @@ export async function onRequestPost(context) {
   try {
     // 把相对 URL 转为绝对 URL（Cloudflare workerd 中 fetch 不支持相对路径）
     const origin = new URL(request.url).origin
-    const absEmbeddingsUrl = embeddingsUrl?.startsWith('/')
-      ? `${origin}${embeddingsUrl}`
-      : embeddingsUrl
+    const rawEmbeddingsUrl = env.RAG_EMBEDDINGS_URL || '/data/classics_embeddings.f16.bin'
+    const absEmbeddingsUrl = rawEmbeddingsUrl.startsWith('/')
+      ? `${origin}${rawEmbeddingsUrl}`
+      : rawEmbeddingsUrl
 
     const { status, body: out } = await handleChat({
       userInput: content,
