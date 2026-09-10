@@ -11,7 +11,7 @@
 
     <div class="ink-divider"></div>
 
-    <!-- 贰 · 典籍名句 + 情境解读（选中引用 + 解读一体化） -->
+    <!-- 贰 · 典籍名句（选中引用） -->
     <section class="reply-part part-2 ink-spread-in" style="animation-delay: 0.1s;">
       <div class="part-header">
         <span class="part-label">贰 · 典籍名句</span>
@@ -26,17 +26,24 @@
         <p class="quote-source" v-if="activeQuote.source">
           —— {{ formatSource(activeQuote) }}
         </p>
-        <!-- 情境解读（紧跟选中引用，位于卡片上方） -->
-        <p class="quote-interpretation" v-if="activeQuote.interpretation">
-          {{ activeQuote.interpretation }}
-        </p>
       </div>
     </section>
 
     <div class="ink-divider"></div>
 
+    <!-- 叁 · 情景解读 -->
+    <section class="reply-part part-3-interpretation ink-spread-in" style="animation-delay: 0.15s;" v-if="activeQuote && activeQuote.interpretation">
+      <div class="part-header">
+        <span class="part-label">叁 · 情景解读</span>
+        <span class="part-seal">Interpretation</span>
+      </div>
+      <p class="part-content interpretation-text">{{ activeQuote.interpretation }}</p>
+    </section>
+
+    <div class="ink-divider"></div>
+
     <!-- 肆 · 古人各异（4 卡片切换展示不同古人答案） -->
-    <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="reply.quotes && reply.quotes.length">
+    <section class="reply-part part-4 ink-spread-in" style="animation-delay: 0.2s;" v-if="reply.quotes && reply.quotes.length">
       <div class="part-header">
         <span class="part-label">肆 · 古人各异</span>
         <span class="part-seal">Plural Answers</span>
@@ -257,21 +264,24 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   letter-spacing: 0.1em;
 }
 
-/* ===== 情境解读（紧跟引用，位于卡片上方） ===== */
-.quote-interpretation {
-  margin-top: 12px;
-  padding: 10px 14px;
+/* ===== 叁 · 情景解读 ===== */
+.part-3-interpretation .part-header {
+  margin-bottom: 12px;
+}
+
+.interpretation-text {
+  font-size: 15px;
+  line-height: 1.85;
+  letter-spacing: 0.04em;
+  color: var(--ink-100);
+  font-family: 'Noto Serif SC', 'KaiTi', 'STKaiti', serif;
+  padding: 12px 16px;
   background: rgba(176, 140, 60, 0.06);
   border-left: 3px solid var(--ochre);
   border-radius: 0 4px 4px 0;
-  font-size: 13.5px;
-  color: var(--ink-60);
-  font-style: italic;
-  letter-spacing: 0.04em;
-  line-height: 1.75;
 }
 
-/* ===== 叁 · 古人各异（4 卡片） ===== */
+/* ===== 肆 · 古人各异（4 卡片） ===== */
 .plural-hint {
   font-family: 'Noto Serif SC', serif;
   font-size: 13px;
