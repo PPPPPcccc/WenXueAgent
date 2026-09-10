@@ -271,14 +271,16 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 .interpretation-text {
   font-size: 15px;
-  line-height: 1.85;
+  line-height: 1.95;
   letter-spacing: 0.04em;
   color: var(--ink-100);
   font-family: 'Noto Serif SC', 'KaiTi', 'STKaiti', serif;
-  padding: 12px 16px;
+  padding: 14px 18px;
   background: rgba(176, 140, 60, 0.06);
   border-left: 3px solid var(--ochre);
   border-radius: 0 4px 4px 0;
+  white-space: pre-wrap;     /* 保留原文换行（LLM 通常会用破折号/句号区分两段） */
+  text-indent: 2em;           /* 中文段落首行缩进，更像"情景解读" */
 }
 
 /* ===== 肆 · 古人各异（4 卡片） ===== */
