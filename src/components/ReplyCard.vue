@@ -24,7 +24,7 @@
           <span class="quote-text">{{ activeQuote.quote }}</span>
         </blockquote>
         <p class="quote-source" v-if="activeQuote.source">
-          —— {{ activeQuote.source }}
+          —— {{ formatSource(activeQuote) }}
         </p>
         <!-- 情境解读（紧跟选中引用，位于卡片上方） -->
         <p class="quote-interpretation" v-if="activeQuote.interpretation">
@@ -35,10 +35,10 @@
 
     <div class="ink-divider"></div>
 
-    <!-- 叁 · 古人各异（4 卡片切换展示不同古人答案） -->
+    <!-- 肆 · 古人各异（4 卡片切换展示不同古人答案） -->
     <section class="reply-part part-3 ink-spread-in" style="animation-delay: 0.2s;" v-if="reply.quotes && reply.quotes.length">
       <div class="part-header">
-        <span class="part-label">叁 · 古人各异</span>
+        <span class="part-label">肆 · 古人各异</span>
         <span class="part-seal">Plural Answers</span>
       </div>
       <p class="plural-hint" v-if="!hidePluralHint">同一个问题，古人没有同一个答案。</p>
@@ -52,7 +52,6 @@
           :aria-label="`选择第 ${i + 1} 条名句`"
         >
           <span class="quote-card-book">{{ getBookLabel(q) }}</span>
-          <span class="quote-card-preview">{{ q.quote.slice(0, 12) }}{{ q.quote.length > 12 ? '…' : '' }}</span>
         </button>
       </div>
     </section>
@@ -86,12 +85,62 @@ const activeQuote = computed(() => {
   return props.reply.quotes[activeIndex.value] || props.reply.quotes[0]
 })
 
-// 从 source 中提取书名作为卡片标签
+// 从 matched 典籍或 source 中提取书名/诗人名作为卡片标签
+// 唐诗三百首 → 显示诗人名（如"张九龄"），其他显示书名
 function getBookLabel(q) {
+  // 优先用 matched 典籍的 book（最准确）
+  if (q.matched?.book === '唐诗三百首') {
+    const author = q.matched.chapter?.split('·').pop()
+    if (author) return author
+  }
+  if (q.matched?.book) return q.matched.book
+
+  // fallback：解析 source 字符串
   if (!q.source) return '佚名'
-  // 《书名》第X章  → 提取书名
+  // 《书名·章节》 → 提取书名
   const m = q.source.match(/《(.+?)》/)
-  return m ? m[1] : q.source.split('|')[0].trim()
+  if (!m) return q.source.split('|')[0].trim()
+  const book = m[1]
+  // 唐诗三百首：author 在 · 之后
+  if (book === '唐诗三百首') {
+    const author = q.source.split('·').pop()?.trim()
+    if (author) return author
+  }
+  return book
+}
+
+// 格式化出处展示为《书名·章节名》格式
+// 兼容 matched（book + chapter 分开）和 source 字符串两种来源
+function formatSource(q) {
+  // 优先用 matched 典籍（最准确）
+  if (q.matched?.book) {
+    const book = q.matched.book
+    const rawChapter = q.matched.chapter || ''
+
+    if (book === '唐诗三百首') {
+      // chapter 格式："诗题·诗人"，取诗人
+      const author = rawChapter.split('·').pop()
+      if (author) return `《唐诗三百首·${author}》`
+    }
+
+    // 去除章节名中的"章句"等后缀，保留核心章节名
+    const chapter = rawChapter
+      .replace(/章句$/, '')
+      .replace(/第[一二三四五六七八九十百零\d]+章/, (m) => m.replace(/^第/, '').replace(/章$/, ''))
+      .trim()
+
+    if (chapter) return `《${book}·${chapter}》`
+    return `《${book}》`
+  }
+
+  // fallback：source 字符串
+  if (!q.source) return ''
+  // 已经是《书名·章节》格式就直接返回
+  if (q.source.includes('·')) return q.source
+  // 《书名》第X章 或 《书名》 → 转为《书名·章节》
+  const m = q.source.match(/^《(.+?)》?第?(.+?)章?$/)
+  if (m && m[2]) return `《${m[1]}·${m[2]}》`
+  return q.source
 }
 
 // 切换到新数据时重置索引
@@ -297,24 +346,9 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   color: var(--vermilion-dark);
 }
 
-.quote-card-preview {
-  font-family: 'Noto Serif SC', serif;
-  font-size: 11px;
-  color: var(--ink-40);
-  letter-spacing: 0.04em;
-  line-height: 1.3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 100%;
-}
-
-.quote-card-btn.active .quote-card-preview {
-  color: var(--ink-60);
-}
-
 /* ===== 操作按钮 ===== */
 .reply-actions {
+  margin-top: 16px;
   margin-top: 16px;
   display: flex;
   gap: 8px;

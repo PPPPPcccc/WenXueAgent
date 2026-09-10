@@ -1,9 +1,9 @@
 // parser.js
 // 移植自 backend/scripts/response_parser.py
 
-const SECTION_PATTERN = /第一部分[\-—]?通用回复\s*[:：]\s*(?<part1>.+?)\s*第二部分[\-—]?典籍名句\s*[:：]\s*(?<part2>.+?)\s*第三部分[\-—]?轻量情境解读\s*[:：]\s*"(?<part3>.+?)"/s
+const SECTION_PATTERN = /第一部分[\-—]?通用回复\s*[:：]\s*(?<part1>.+?)\s*第二部分[\-—]?典籍名句\s*[:：]\s*(?<part2>.+?)\s*第三部分[\-—]?解释\s*[:：]\s*"(?<part3>.+?)"/s
 
-const SECTION_PATTERN_FALLBACK = /第一部分[\-—]?通用回复\s*[:：]\s*(?<part1>.+?)\s*第二部分[\-—]?典籍名句\s*[:：]\s*(?<part2>.+?)\s*第三部分[\-—]?轻量情境解读\s*[:：]\s*(?<part3>.+)/s
+const SECTION_PATTERN_FALLBACK = /第一部分[\-—]?通用回复\s*[:：]\s*(?<part1>.+?)\s*第二部分[\-—]?典籍名句\s*[:：]\s*(?<part2>.+?)\s*第三部分[\-—]?解释\s*[:：]\s*(?<part3>.+)/s
 
 export function parseResponse(raw) {
   if (!raw) return { success: false, error: 'empty response' }
@@ -33,4 +33,14 @@ export function assertValidPart3(part3) {
   if (!part3.startsWith('这句话出自')) return false
   if (!part3.includes('《') || !part3.includes('》')) return false
   return true
+}
+
+/**
+ * 从 part3 ("这句话出自《论语·学而》。…") 中抽取「书名·章节名」
+ * 返回 null 表示抽取失败。
+ */
+export function extractSourceFromPart3(part3) {
+  if (!part3) return null
+  const m = part3.match(/《([^》]+)》/)
+  return m ? m[1].trim() : null
 }
