@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container chat-view" :style="chatViewStyle">
+  <div class="app-container chat-view">
 
     <div v-if="!ready" class="loading-state">
       <p>正在加载典籍库…</p>
@@ -25,16 +25,11 @@
       </div>
     </div>
 
-    <!-- 输入区 -->
+    <!-- 输入区：文档流中位于最新聊天下方，不再 fixed -->
     <section
-      ref="inputAreaEl"
       class="ink-card input-area ink-spread-in"
-      :class="{ collapsed: !atBottom }"
-      :title="atBottom ? '' : '点击展开输入框'"
-      @click="onInputAreaClick"
     >
       <textarea
-        v-show="atBottom"
         v-model="content"
         placeholder="把你的心情写下来……"
         rows="2"
@@ -45,7 +40,7 @@
         @keydown.ctrl.enter="onSend"
       />
       <div class="input-meta">
-        <span v-show="atBottom" class="char-counter">{{ content.length }} / 500</span>
+        <span class="char-counter">{{ content.length }} / 500</span>
         <button
           class="btn-ink send-btn"
           :disabled="!content.trim() || loading || !ready"
@@ -60,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { chatApi } from '@/api'
 import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
@@ -70,14 +65,6 @@ const content = ref('')
 const loading = ref(false)
 const messages = ref([])
 const ready = ref(false)
-// 距底部 ≤ 80px 视为在底部；否则收起输入框
-const atBottom = ref(true)
-// 测量输入框实际高度，用于动态计算 chat-view 底部 padding
-const inputAreaEl = ref(null)
-const inputHeight = ref(120)
-let resizeObs = null
-// 让最后一条聊天记录能被多滚动"半个聊天框"高度，留出操作空间
-const HALF_CARD_EXTRA = 160
 
 const { load: loadClassics } = useClassics()
 
@@ -87,31 +74,9 @@ const formatTime = (iso) => {
   return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
 }
 
-// chat-view 底部动态 padding：输入框距离视口底部 24px + 输入框高度 + 半张回复卡的额外滚动空间
-const chatViewStyle = computed(() => ({
-  paddingBottom: `${Math.ceil(inputHeight.value + 24 + HALF_CARD_EXTRA)}px`,
-}))
-
 const scrollToBottom = () => {
   nextTick(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-  })
-}
-
-// 检测是否在底部（给 80px 容差，避免抖动）
-const updateAtBottom = () => {
-  const doc = document.documentElement
-  const distance = doc.scrollHeight - window.scrollY - window.innerHeight
-  atBottom.value = distance <= 80
-}
-
-// 收起态点击输入区：滚到底部 + 聚焦
-const onInputAreaClick = (e) => {
-  if (atBottom.value) return
-  e.stopPropagation()
-  scrollToBottom()
-  nextTick(() => {
-    document.querySelector('.chat-input')?.focus()
   })
 }
 
@@ -173,34 +138,17 @@ const onDelete = (msg) => {
   messages.value = messages.value.filter((m) => m.id !== msg.id)
 }
 
-const setupInputObserver = () => {
-  if (!inputAreaEl.value || typeof ResizeObserver === 'undefined') return
-  // 只测量高度用于计算 padding-bottom；不再触发 scrollToBottom——会与
-  // 收起/展开的 padding 过渡形成反馈循环，导致页面上下抖动。
-  resizeObs = new ResizeObserver(([entry]) => {
-    inputHeight.value = entry.contentRect.height
-  })
-  resizeObs.observe(inputAreaEl.value)
-}
-
 onMounted(async () => {
   await loadClassics()
   ready.value = true
-  window.addEventListener('scroll', updateAtBottom, { passive: true })
-  window.addEventListener('resize', updateAtBottom)
-  setupInputObserver()
-  updateAtBottom()
-})
-
-onBeforeUnmount(() => {
-  window.removeEventListener('scroll', updateAtBottom)
-  window.removeEventListener('resize', updateAtBottom)
-  resizeObs?.disconnect()
 })
 </script>
 
 <style scoped>
-.chat-view { padding-top: 24px; }
+.chat-view {
+  padding-top: 24px;
+  padding-bottom: 80px;          /* 底部留白，避免贴边 */
+}
 
 .loading-state {
   text-align: center;
@@ -255,34 +203,15 @@ onBeforeUnmount(() => {
   word-break: break-word;
 }
 
+/* 输入区：文档流中的普通块级元素，位于最新回复下方 */
 .input-area {
-  position: fixed;
-  bottom: 24px;
-  left: 0;
-  right: 0;
-  margin: 0 auto;
+  margin: 32px auto 0;
   width: calc(100% - 48px);
   max-width: 720px;
-  z-index: 3;
   background: var(--paper-light);
-  backdrop-filter: blur(8px);
   border: 1px solid var(--ink-10);
   box-shadow: 0 -4px 24px rgba(26, 26, 26, 0.08);
   padding: 10px 16px;
-  transition: padding 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
-  cursor: text;
-}
-
-/* 收起态：仅按钮高度，textarea 与字数隐藏 */
-.input-area.collapsed {
-  padding: 8px 16px;
-  cursor: pointer;
-}
-
-.input-area.collapsed .input-meta {
-  margin-top: 0;
-  justify-content: flex-end;
-  width: 100%;
 }
 
 .chat-input {
@@ -302,7 +231,6 @@ onBeforeUnmount(() => {
   justify-content: space-between;
   align-items: center;
   margin-top: 6px;
-  transition: margin-top 0.28s ease;
 }
 
 .char-counter {
