@@ -105,7 +105,8 @@ export async function onRequestPost(context) {
       classics: merged,
       embeddingsUrl: null,
       embeddingDim: DIM,
-      initialEmbeddings: mergedEmb,
+      // mergedEmb 已合并好（顺序与 merged 对齐），不要走 initialEmbeddings 路径
+      mergedEmbeddings: mergedEmb,
       userEmbeddings,
       removedIds,
     })
