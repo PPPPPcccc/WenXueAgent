@@ -175,10 +175,10 @@ const onDelete = (msg) => {
 
 const setupInputObserver = () => {
   if (!inputAreaEl.value || typeof ResizeObserver === 'undefined') return
+  // 只测量高度用于计算 padding-bottom；不再触发 scrollToBottom——会与
+  // 收起/展开的 padding 过渡形成反馈循环，导致页面上下抖动。
   resizeObs = new ResizeObserver(([entry]) => {
     inputHeight.value = entry.contentRect.height
-    // 高度变化时若用户原已"在底部"，把视口推回新底部
-    if (atBottom.value) scrollToBottom()
   })
   resizeObs.observe(inputAreaEl.value)
 }
