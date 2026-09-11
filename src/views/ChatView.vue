@@ -72,7 +72,7 @@
 <script setup>
 import { ref, onMounted, nextTick } from 'vue'
 import { chatApi } from '@/api'
-import { historyStore, userClassicsStore } from '@/lib/store'
+import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
 import ReplyCard from '@/components/ReplyCard.vue'
 import MountainDeco from '@/components/MountainDeco.vue'
@@ -82,7 +82,7 @@ const loading = ref(false)
 const messages = ref([])
 const ready = ref(false)
 
-const { load: loadClassics, classics: allClassicsList, allEmbeddings, removedIds: getRemovedIds } = useClassics()
+const { load: loadClassics } = useClassics()
 
 const formatTime = (iso) => {
   if (!iso) return ''
@@ -107,15 +107,7 @@ const onSend = async () => {
   scrollToBottom()
 
   try {
-    // 把用户增量数据传给后端，确保新增/删除的典籍 RAG 能正确选用
-    const userClassics = userClassicsStore.list()
-    const userEmbeddings = userClassicsStore.embeddings()
-    const removedIds = getRemovedIds()
-    const data = await chatApi.send(text, {
-      userClassics,
-      userEmbeddings,
-      removedIds,
-    })
+    const data = await chatApi.send(text)
     const msg = {
       id: data.id || `a-${Date.now()}`,
       role: 'assistant',

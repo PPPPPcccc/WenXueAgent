@@ -38,31 +38,12 @@ async function fetchJSON(url, options = {}) {
 }
 
 export const chatApi = {
-  send(content, extra = {}) {
+  send(content) {
     return fetchJSON('/api/chat', {
       method: 'POST',
-      body: JSON.stringify({
-        content,
-        // 藏书阁用户增量数据（可选，用于 RAG 同步）
-        userClassics: extra.userClassics,
-        userEmbeddings: extra.userEmbeddings,
-        removedIds: extra.removedIds,
-      }),
+      body: JSON.stringify({ content }),
     })
   },
-}
-
-/**
- * 为一组文本生成 embedding 向量（供藏书阁新建/导入时调用）
- * @param {string[]} texts
- * @returns {Promise<number[][]>} embeddings
- */
-export async function embedTexts(texts) {
-  const data = await fetchJSON('/api/embed', {
-    method: 'POST',
-    body: JSON.stringify({ texts }),
-  })
-  return data.embeddings || []
 }
 
 export async function fetchInitialClassics() {
