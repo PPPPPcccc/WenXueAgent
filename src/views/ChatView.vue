@@ -26,7 +26,7 @@
     </div>
 
     <!-- 输入区 -->
-    <section class="ink-card input-area ink-spread-in" style="margin-top: 32px;">
+    <section class="ink-card input-area ink-spread-in">
       <textarea
         v-model="content"
         placeholder="把你的心情写下来……"
@@ -199,9 +199,12 @@ onMounted(async () => {
 }
 
 .input-area {
-  position: sticky;
-  bottom: 16px;
-  z-index: 2;
+  position: fixed;
+  bottom: 24px;
+  left: 25%;
+  right: 25%;
+  width: 50%;
+  z-index: 3;
   background: var(--paper-light);
   backdrop-filter: blur(8px);
   border: 1px solid var(--ink-10);

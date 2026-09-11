@@ -57,7 +57,7 @@ function op(i) {
 <style scoped>
 .cloud-mountain {
   position: fixed;
-  top: 0;
+  top: 64px;
   left: 0;
   right: 0;
   width: 100%;
