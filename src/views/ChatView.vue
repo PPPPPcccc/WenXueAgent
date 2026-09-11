@@ -25,9 +25,10 @@
       </div>
     </div>
 
-    <!-- 输入区：文档流中位于最新聊天下方，不再 fixed -->
+    <!-- 输入区：没有消息时悬浮于视口底部；出现第一条消息后挂在文档流下方 -->
     <section
       class="ink-card input-area ink-spread-in"
+      :class="{ floating: messages.length === 0 }"
     >
       <textarea
         v-model="content"
@@ -212,6 +213,17 @@ onMounted(async () => {
   border: 1px solid var(--ink-10);
   box-shadow: 0 -4px 24px rgba(26, 26, 26, 0.08);
   padding: 10px 16px;
+}
+
+/* 还没聊过天：悬浮在视口底部，方便用户直接输入 */
+.input-area.floating {
+  position: fixed;
+  bottom: 24px;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 3;
+  backdrop-filter: blur(8px);
 }
 
 .chat-input {
