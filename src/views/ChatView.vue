@@ -1,12 +1,6 @@
 <template>
   <div class="app-container chat-view">
 
-    <header class="page-header ink-spread-in">
-      <h2 class="page-title">此时 · 此刻</h2>
-      <p class="page-subtitle">写下你此刻的心境，典籍自有回应。</p>
-      <BrushPoetry />
-    </header>
-
     <div v-if="!ready" class="loading-state">
       <p>正在加载典籍库…</p>
     </div>
@@ -64,7 +58,6 @@ import { chatApi } from '@/api'
 import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
 import ReplyCard from '@/components/ReplyCard.vue'
-import BrushPoetry from '@/components/BrushPoetry.vue'
 
 const content = ref('')
 const loading = ref(false)
@@ -151,27 +144,6 @@ onMounted(async () => {
 
 <style scoped>
 .chat-view { padding-top: 24px; }
-
-.page-header {
-  text-align: center;
-  margin-bottom: 32px;
-}
-
-.page-title {
-  font-family: 'Noto Serif SC', 'STSong', serif;
-  font-size: 32px;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  color: var(--ink-100);
-  margin-bottom: 8px;
-}
-
-.page-subtitle {
-  font-size: 13px;
-  color: var(--ink-40);
-  letter-spacing: 0.3em;
-  font-style: italic;
-}
 
 .loading-state {
   text-align: center;
