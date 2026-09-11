@@ -125,7 +125,8 @@ function rot(i) {
   transform: rotate(var(--rot));
   user-select: none;
   filter: blur(0.3px);
-  animation: writeHoldFade 32s ease-in-out infinite both;
+  /* 深黑停留1s，淡化1s，等待0s，书写阶段94%（~30s） */
+  animation: writeHoldFade 32.08s ease-in-out infinite both;
 }
 
 .ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; animation-name: writeChar1; }
@@ -137,66 +138,67 @@ function rot(i) {
 .ink-char:nth-child(7) { justify-content: center;  animation-name: writeChar7; }
 .ink-char:nth-child(8) { justify-content: flex-start; padding-left: 6%; animation-name: writeChar8; }
 
-/* 32s ×3速：书写 0–33%（~10.5s），深黑停留 33–70%，淡回灰色 70–85%，等待循环 85–100% */
+/* 深黑停留1s(97%)，淡化1s(100%)，等待0s，书写94%(~30s) */
 @keyframes writeChar1 {
   0%   { opacity: 0.08; }
-  5%   { opacity: 1;    }
-  70%  { opacity: 1;    }
-  85%  { opacity: 0.08; }
+  4%   { opacity: 1;    }
+  94%  { opacity: 1;    }
+  97%  { opacity: 0.08; }
   100% { opacity: 0.08; }
 }
 @keyframes writeChar2 {
-  0%, 4% { opacity: 0.08; }
-  9%     { opacity: 1;    }
-  70%    { opacity: 1;    }
-  85%    { opacity: 0.08; }
-  100%   { opacity: 0.08; }
+  0%, 4%  { opacity: 0.08; }
+  8%      { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar3 {
-  0%, 8% { opacity: 0.08; }
-  13%    { opacity: 1;    }
-  70%    { opacity: 1;    }
-  85%    { opacity: 0.08; }
-  100%   { opacity: 0.08; }
+  0%, 8%  { opacity: 0.08; }
+  12%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar4 {
   0%, 12% { opacity: 0.08; }
-  17%     { opacity: 1;    }
-  70%     { opacity: 1;    }
-  85%     { opacity: 0.08; }
+  16%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
   100%    { opacity: 0.08; }
 }
 @keyframes writeChar5 {
   0%, 16% { opacity: 0.08; }
-  21%     { opacity: 1;    }
-  70%     { opacity: 1;    }
-  85%     { opacity: 0.08; }
+  20%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
   100%    { opacity: 0.08; }
 }
 @keyframes writeChar6 {
   0%, 20% { opacity: 0.08; }
-  25%     { opacity: 1;    }
-  70%     { opacity: 1;    }
-  85%     { opacity: 0.08; }
+  24%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
   100%    { opacity: 0.08; }
 }
 @keyframes writeChar7 {
   0%, 24% { opacity: 0.08; }
-  29%     { opacity: 1;    }
-  70%     { opacity: 1;    }
-  85%     { opacity: 0.08; }
+  28%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
   100%    { opacity: 0.08; }
 }
 @keyframes writeChar8 {
   0%, 28% { opacity: 0.08; }
-  33%     { opacity: 1;    }
-  70%     { opacity: 1;    }
-  85%     { opacity: 0.08; }
+  32%     { opacity: 1;    }
+  94%     { opacity: 1;    }
+  97%     { opacity: 0.08; }
   100%    { opacity: 0.08; }
 }
 
 @keyframes writeHoldFade {
-  0%, 100% { opacity: 0.08; }
+  0%, 97% { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 
 /* ---- 远山 ---- */
