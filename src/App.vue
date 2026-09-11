@@ -2,6 +2,8 @@
   <div id="app-root">
     <AppHeader />
     <main>
+      <WillowDeco />
+      <InkRipples />
       <router-view v-slot="{ Component }">
         <transition name="fade-up" mode="out-in">
           <component :is="Component" />
@@ -16,6 +18,8 @@
 
 <script setup>
 import AppHeader from '@/components/AppHeader.vue'
+import WillowDeco from '@/components/WillowDeco.vue'
+import InkRipples from '@/components/InkRipples.vue'
 </script>
 
 <style>
