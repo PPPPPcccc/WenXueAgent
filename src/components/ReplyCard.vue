@@ -23,9 +23,6 @@
         <blockquote class="selected-quote">
           <span class="quote-text">{{ activeQuote.quote }}</span>
         </blockquote>
-        <p class="quote-source" v-if="activeQuote.source">
-          —— {{ formatSource(activeQuote) }}
-        </p>
       </div>
     </section>
 
@@ -104,16 +101,27 @@ function getBookLabel(q) {
 
   // fallback：解析 source 字符串
   if (!q.source) return '佚名'
-  // 《书名·章节》 → 提取书名
-  const m = q.source.match(/《(.+?)》/)
-  if (!m) return q.source.split('|')[0].trim()
-  const book = m[1]
-  // 唐诗三百首：author 在 · 之后
-  if (book === '唐诗三百首') {
-    const author = q.source.split('·').pop()?.trim()
-    if (author) return author
+  // 《书名·章节》 → 仅提取书名（书名是 · 前的部分）
+  let m = q.source.match(/^《([^·》]+)·[^》]+》/)
+  if (m) {
+    const book = m[1]
+    // 唐诗三百首：author 在 · 之后（保持原有逻辑）
+    if (book === '唐诗三百首') {
+      const author = q.source.split('·').pop()?.replace(/》/g, '').trim()
+      if (author) return author
+    }
+    return book
   }
-  return book
+  // 《书名》（无章节）
+  m = q.source.match(/《(.+?)》/)
+  if (m) {
+    const book = m[1]
+    if (book === '唐诗三百首') {
+      return '唐诗三百首'
+    }
+    return book
+  }
+  return q.source.split('|')[0].trim()
 }
 
 // 格式化出处展示为《书名·章节名》格式
