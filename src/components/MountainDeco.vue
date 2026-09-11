@@ -125,7 +125,7 @@ function rot(i) {
   transform: rotate(var(--rot));
   user-select: none;
   filter: blur(0.3px);
-  animation: writeHoldFade 32s var(--ease) infinite both;
+  animation: writeHoldFade 32s ease-in-out infinite both;
 }
 
 .ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; animation-name: writeChar1; }
