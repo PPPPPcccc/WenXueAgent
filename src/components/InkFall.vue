@@ -17,31 +17,28 @@ let dpr = 1
 
 const COLORS = ['#18100a', '#241a10', '#312517', '#1d150d']
 
-// 创建粒子
-function spawn(initial = false) {
-  const isMobile = w <= 768
-  const r = Math.random()
-  const isStreak = r < 0.35   // 35% 拉成短笔触（带运动感）
-  const isDot = !isStreak
+function rand(min, max) { return min + Math.random() * (max - min) }
 
-  return {
-    x: Math.random() * w,
-    y: initial ? Math.random() * h : -20 - Math.random() * 80,
-    size: isMobile
-      ? (isDot ? 0.7 + Math.random() * 1.6 : 0.9 + Math.random() * 1.8)
-      : (isDot ? 1.1 + Math.random() * 2.0 : 1.3 + Math.random() * 2.4),
-    opacity: 0.18 + Math.random() * 0.42,
-    // 飘落速度（像素/秒）
-    vy: isMobile ? 22 + Math.random() * 38 : 28 + Math.random() * 55,
-    // 个体偏移：让不同粒子有不同运动相位
-    phase: Math.random() * Math.PI * 2,
-    sway: 0.5 + Math.random() * 1.2,            // 摆动幅度
-    spin: 0.6 + Math.random() * 0.8,             // 摆动频率
-    color: COLORS[Math.floor(Math.random() * COLORS.length)],
-    type: isStreak ? 'streak' : 'dot',
-    streak: 4 + Math.random() * 10,              // 笔触长度
-    angle: 0                                     // 笔触倾角（风向决定）
-  }
+/** 随机化单个粒子的所有参数 */
+function randomize(p, initialY = false) {
+  p.x = Math.random() * w
+  p.y = initialY ? Math.random() * h : -rand(8, 30)
+  p.size = (w <= 768 ? rand(0.8, 2.4) : rand(1.2, 3.2))
+  p.baseOpacity = rand(0.22, 0.55)
+
+  // 飘落速度（更慢，单位 px/s）
+  p.vy = rand(8, 22)
+
+  // 三组不可通约频率的正弦摆动 → 合成"不规则"轨迹
+  p.p1 = rand(0, Math.PI * 2); p.f1 = rand(0.25, 0.65); p.a1 = rand(10, 26)
+  p.p2 = rand(0, Math.PI * 2); p.f2 = rand(0.7,  1.5);  p.a2 = rand(5,  16)
+  p.p3 = rand(0, Math.PI * 2); p.f3 = rand(1.6,  2.6);  p.a3 = rand(3,  10)
+
+  // 寿命（秒）—— 随时可能淡化消失的关键
+  p.life = 1
+  p.maxLife = rand(8, 26)
+
+  p.color = COLORS[Math.floor(Math.random() * COLORS.length)]
 }
 
 function initCanvas() {
@@ -51,36 +48,38 @@ function initCanvas() {
   h = rect.height
   canvasRef.value.width = Math.floor(w * dpr)
   canvasRef.value.height = Math.floor(h * dpr)
-  ctx = canvasRef.value.getContext('2d')      // ← 之前漏了这行
+  ctx = canvasRef.value.getContext('2d')
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 }
 
 function update(dt) {
-  const dtS = Math.min(dt, 50) / 1000   // 秒（限制单帧最大步长）
+  const dtS = Math.min(dt, 50) / 1000
   windT += dtS
 
-  // 风：慢正弦 + 阵风脉冲（让画面有"被吹"的感觉）
-  const slowWind = Math.sin(windT * 0.35) * 18
-  const gust = Math.max(0, Math.sin(windT * 0.18) - 0.55) * 70
+  // 全局缓风 + 偶发阵风（让画面有大方向感）
+  const slowWind = Math.sin(windT * 0.25) * 10
+  const gust = Math.max(0, Math.sin(windT * 0.13) - 0.55) * 32
 
   for (let i = 0; i < particles.length; i++) {
     const p = particles[i]
 
-    // 风向随时间微微偏转
-    const windDir = Math.sin(windT * 0.12) * 25 + gust
-    const sway = Math.sin(windT * p.spin + p.phase) * p.sway
+    // 三个不可通约频率叠加 + 全局风 → 每颗粒子轨迹都不一样
+    const vx =
+      slowWind + gust +
+      Math.sin(windT * p.f1 + p.p1) * p.a1 +
+      Math.sin(windT * p.f2 + p.p2) * p.a2 +
+      Math.sin(windT * p.f3 + p.p3) * p.a3
 
+    p.x += vx * dtS
     p.y += p.vy * dtS
-    p.x += (windDir + sway) * dtS
-    p.angle = Math.atan2(windDir + sway, p.vy) * (180 / Math.PI)
 
-    // 越过底部 → 从顶部重生
-    if (p.y > h + 30) {
-      p.y = -20
-      p.x = Math.random() * w
-      p.phase = Math.random() * Math.PI * 2
-    }
-    // 横向飘出 → 回到另一侧
+    // 寿命流逝
+    p.life -= dtS / p.maxLife
+
+    // 寿命到 0 或飘出底边 → 在顶部重生（参数全随机化）
+    if (p.life <= 0 || p.y > h + 30) randomize(p, false)
+
+    // 横向飘出 → 从另一侧回来
     if (p.x > w + 20) p.x = -20
     if (p.x < -20) p.x = w + 20
   }
@@ -91,28 +90,24 @@ function draw() {
 
   for (let i = 0; i < particles.length; i++) {
     const p = particles[i]
-    ctx.globalAlpha = p.opacity
-    ctx.fillStyle = p.color
-    ctx.strokeStyle = p.color
 
-    if (p.type === 'dot') {
-      // 墨点（部分拉成椭圆，更像飞溅）
-      const r = p.size
-      ctx.beginPath()
-      ctx.ellipse(p.x, p.y, r, r * 0.85, (p.angle * Math.PI) / 180, 0, Math.PI * 2)
-      ctx.fill()
+    // 透明度根据寿命平滑过渡：前 15% 渐入、中段保持、后 30% 渐出
+    let alpha
+    if (p.life > 0.85) {
+      alpha = p.baseOpacity * Math.min(1, (1 - p.life) / 0.15)
+    } else if (p.life < 0.3) {
+      alpha = p.baseOpacity * Math.max(0, p.life / 0.3)
     } else {
-      // 笔触：短弧线，沿运动方向倾斜（视觉上像落墨）
-      const angleRad = (p.angle * Math.PI) / 180
-      const dx = Math.sin(angleRad) * p.streak
-      const dy = -Math.cos(angleRad) * p.streak
-      ctx.lineWidth = p.size * 0.55
-      ctx.lineCap = 'round'
-      ctx.beginPath()
-      ctx.moveTo(p.x - dx, p.y - dy)
-      ctx.lineTo(p.x + dx, p.y + dy)
-      ctx.stroke()
+      alpha = p.baseOpacity
     }
+
+    if (alpha <= 0.005) continue   // 完全透明就不画
+
+    ctx.globalAlpha = alpha
+    ctx.fillStyle = p.color
+    ctx.beginPath()
+    ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2)
+    ctx.fill()
   }
 
   ctx.globalAlpha = 1
@@ -129,12 +124,7 @@ function loop(time) {
 
 function handleResize() {
   initCanvas()
-  // 重新均匀分布
-  particles = particles.map((p) => ({
-    ...p,
-    x: Math.random() * w,
-    y: Math.random() * h,
-  }))
+  particles.forEach((p) => randomize(p, true))
 }
 
 onMounted(() => {
@@ -143,9 +133,13 @@ onMounted(() => {
 
   initCanvas()
 
-  const isMobile = w <= 768
-  const count = isMobile ? 90 : 180
-  for (let i = 0; i < count; i++) particles.push(spawn(true))
+  // 数量减少一些，让慢飘更有空间感
+  const count = w <= 768 ? 60 : 120
+  for (let i = 0; i < count; i++) {
+    const p = {}
+    randomize(p, true)
+    particles.push(p)
+  }
 
   lastTime = performance.now()
   raf = requestAnimationFrame(loop)
@@ -166,7 +160,7 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 0;       /* 在内容之下 */
+  z-index: 0;
   overflow: hidden;
   display: block;
 }
