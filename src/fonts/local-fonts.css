@@ -1,0 +1,35 @@
+/* ========================================================== */
+/* Local fonts — subsetted CJK fonts                          */
+/* ========================================================== */
+
+@font-face {
+  font-family: "Liu Jian Mao Cao";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/LiuJianMaoCao.subset.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Long Cang";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/LongCang.subset.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Ma Shan Zheng";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/MaShanZheng.subset.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "ZCOOL XiaoWei";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/fonts/ZCOOLXiaoWei.subset.ttf") format("truetype");
+  font-display: swap;
+}

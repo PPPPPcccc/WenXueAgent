@@ -284,3 +284,100 @@ a:hover { color: var(--vermilion-dark); }
   .ink-card { padding: 18px 16px; }
   .btn-ink { padding: 9px 18px; font-size: 14px; }
 }
+
+/* ====================================================================
+   云山墨月 · 主题扩展（追加于 2026-09-11）
+   - 不修改任何已有变量或类名，纯粹叠加新装饰
+   - 旧主题完全保留，向后兼容
+   ==================================================================== */
+
+:root {
+  /* ---- 宣纸米黄（云山墨月主背景） ---- */
+  --bg:           #f0e6c8;
+  --bg-soft:      #f5edd2;
+  --bg-deep:      #e6d8b0;
+  --paper-warm:   #faf3df;
+
+  /* ---- 墨色渐变（5 阶） ---- */
+  --ink-deepest:  #18100a;
+  --ink-deep:     #2d1d12;
+  --ink-mid:      #4a3525;
+  --ink-soft:     #7a5a3f;
+  --ink-pale:     #b89a6e;
+
+  /* ---- 金色 ---- */
+  --gold:         #d4af37;
+  --gold-deep:    #b8954a;
+  --gold-bright:  #f0d080;
+
+  /* ---- 青铜 ---- */
+  --bronze:       #6b4f24;
+
+  /* ---- 月色 ---- */
+  --moon:         #d4b56e;
+  --moon-halo:    #b8954a;
+
+  /* ---- 朱砂（与 --vermilion 略调，更深） ---- */
+  --vermilion-warm: #9b3a2f;
+  --vermilion-deep: #7a2d25;
+  --vermilion-soft: #c45a5f;
+
+  /* ---- 字体栈（云山墨月专用） ---- */
+  --font-cursive: "Liu Jian Mao Cao","Long Cang","Ma Shan Zheng","ZCOOL XiaoWei", cursive;
+  --font-kai:     "STKaiti","KaiTi","Kaiti SC","ZCOOL XiaoWei","Noto Serif SC", cursive;
+  --font-serif:   "Noto Serif SC","Songti SC","STSong","Source Han Serif SC","STKaiti", serif;
+}
+
+/* ---- 墨色大字铺底（云山墨月专属） ---- */
+.ink-chars {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: 0;
+}
+
+.ink-chars span {
+  display: block;
+  font-family: var(--font-cursive);
+  font-size: 80px;
+  color: var(--ink-deepest);
+  opacity: 0.06;
+  line-height: 1;
+  padding: 10px 18px;
+  user-select: none;
+  white-space: nowrap;
+}
+
+/* ---- 远山底部装饰条 ---- */
+.ink-mountains {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 120px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.4;
+}
+
+/* ---- 云山墨月主题色调（替换默认宣纸） ---- */
+body.theme-cloud {
+  background: var(--bg);
+}
+
+body.theme-cloud::before {
+  background-image:
+    radial-gradient(ellipse at 20% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 70%, rgba(74, 102, 112, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 1px 1px, rgba(24, 16, 10, 0.018) 1px, transparent 0);
+}
+
+@media (max-width: 768px) {
+  .ink-chars span { font-size: 48px; padding: 6px 12px; }
+  .ink-mountains   { height: 80px; }
+}
