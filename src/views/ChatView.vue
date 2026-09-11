@@ -26,8 +26,14 @@
     </div>
 
     <!-- 输入区 -->
-    <section class="ink-card input-area ink-spread-in">
+    <section
+      class="ink-card input-area ink-spread-in"
+      :class="{ collapsed: !atBottom }"
+      :title="atBottom ? '' : '点击展开输入框'"
+      @click="onInputAreaClick"
+    >
       <textarea
+        v-show="atBottom"
         v-model="content"
         placeholder="把你的心情写下来……"
         rows="2"
@@ -38,7 +44,7 @@
         @keydown.ctrl.enter="onSend"
       />
       <div class="input-meta">
-        <span class="char-counter">{{ content.length }} / 500</span>
+        <span v-show="atBottom" class="char-counter">{{ content.length }} / 500</span>
         <button
           class="btn-ink send-btn"
           :disabled="!content.trim() || loading || !ready"
@@ -53,7 +59,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, nextTick } from 'vue'
+import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { chatApi } from '@/api'
 import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
@@ -63,6 +69,8 @@ const content = ref('')
 const loading = ref(false)
 const messages = ref([])
 const ready = ref(false)
+// 距底部 ≤ 80px 视为在底部；否则收起输入框
+const atBottom = ref(true)
 
 const { load: loadClassics } = useClassics()
 
@@ -75,6 +83,23 @@ const formatTime = (iso) => {
 const scrollToBottom = () => {
   nextTick(() => {
     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+  })
+}
+
+// 检测是否在底部（给 80px 容差，避免抖动）
+const updateAtBottom = () => {
+  const doc = document.documentElement
+  const distance = doc.scrollHeight - window.scrollY - window.innerHeight
+  atBottom.value = distance <= 80
+}
+
+// 收起态点击输入区：滚到底部 + 聚焦
+const onInputAreaClick = (e) => {
+  if (atBottom.value) return
+  e.stopPropagation()
+  scrollToBottom()
+  nextTick(() => {
+    document.querySelector('.chat-input')?.focus()
   })
 }
 
@@ -139,6 +164,14 @@ const onDelete = (msg) => {
 onMounted(async () => {
   await loadClassics()
   ready.value = true
+  window.addEventListener('scroll', updateAtBottom, { passive: true })
+  window.addEventListener('resize', updateAtBottom)
+  updateAtBottom()
+})
+
+onBeforeUnmount(() => {
+  window.removeEventListener('scroll', updateAtBottom)
+  window.removeEventListener('resize', updateAtBottom)
 })
 </script>
 
@@ -212,6 +245,20 @@ onMounted(async () => {
   border: 1px solid var(--ink-10);
   box-shadow: 0 -4px 24px rgba(26, 26, 26, 0.08);
   padding: 10px 16px;
+  transition: padding 0.28s ease, box-shadow 0.28s ease, background 0.28s ease;
+  cursor: text;
+}
+
+/* 收起态：仅按钮高度，textarea 与字数隐藏 */
+.input-area.collapsed {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.input-area.collapsed .input-meta {
+  margin-top: 0;
+  justify-content: flex-end;
+  width: 100%;
 }
 
 .chat-input {
@@ -231,6 +278,7 @@ onMounted(async () => {
   justify-content: space-between;
   align-items: center;
   margin-top: 6px;
+  transition: margin-top 0.28s ease;
 }
 
 .char-counter {
