@@ -1,6 +1,5 @@
 <template>
   <div class="app-container chat-view">
-    <MountainDeco />
 
     <header class="page-header ink-spread-in">
       <h2 class="page-title">此时 · 此刻</h2>
@@ -30,17 +29,6 @@
           @delete="onDelete"
         />
       </div>
-    </div>
-
-    <div v-else-if="ready" class="empty-state">
-      <div class="empty-illustration">
-        <svg viewBox="0 0 200 200" width="120" height="120" aria-hidden="true">
-          <path d="M40 120 Q 100 60 160 120" stroke="#6b6b6b" stroke-width="1.5" fill="none" opacity="0.5"/>
-          <path d="M60 130 Q 100 90 140 130" stroke="#4a4a4a" stroke-width="1.5" fill="none" opacity="0.7"/>
-          <circle cx="100" cy="100" r="3" fill="#a8323a"/>
-        </svg>
-      </div>
-      <p class="empty-text">此处无声，候君落墨。</p>
     </div>
 
     <!-- 输入区 -->
@@ -76,7 +64,6 @@ import { chatApi } from '@/api'
 import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
 import ReplyCard from '@/components/ReplyCard.vue'
-import MountainDeco from '@/components/MountainDeco.vue'
 import BrushPoetry from '@/components/BrushPoetry.vue'
 
 const content = ref('')
@@ -197,18 +184,7 @@ onMounted(async () => {
 .empty-state {
   text-align: center;
   padding: 80px 24px;
-}
-
-.empty-illustration {
-  margin-bottom: 16px;
-  opacity: 0.6;
-}
-
-.empty-text {
-  font-family: 'KaiTi', 'STKaiti', serif;
-  font-size: 16px;
-  color: var(--ink-40);
-  letter-spacing: 0.3em;
+  min-height: 200px;
 }
 
 .conversation-list {

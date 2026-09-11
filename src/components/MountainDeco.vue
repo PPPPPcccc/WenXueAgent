@@ -56,12 +56,16 @@ function op(i) {
 
 <style scoped>
 .cloud-mountain {
-  position: relative;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
   width: 100%;
   height: 240px;
-  margin: 0 0 24px;
+  margin: 0;
   pointer-events: none;
   overflow: hidden;
+  z-index: 0;
 }
 
 /* ---- 月晕 ---- */

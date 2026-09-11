@@ -1,6 +1,7 @@
 <template>
   <div id="app-root">
     <AppHeader />
+    <MountainDeco />
     <main>
       <InkFall />
       <InkRipples />
@@ -10,14 +11,13 @@
         </transition>
       </router-view>
     </main>
-    <footer class="app-footer">
-      <span>— 文以载道，心以疗人 —</span>
-    </footer>
+
   </div>
 </template>
 
 <script setup>
 import AppHeader from '@/components/AppHeader.vue'
+import MountainDeco from '@/components/MountainDeco.vue'
 import InkFall from '@/components/InkFall.vue'
 import InkRipples from '@/components/InkRipples.vue'
 </script>
