@@ -1,5 +1,5 @@
 <template>
-  <!-- 云山墨月：月晕 + 墨色大字 + 双层远山 -->
+  <!-- 云山墨月：月晕 + 墨色大字网格 + 双层远山 -->
   <div class="cloud-mountain" aria-hidden="true">
     <!-- 月晕（背景光圈） -->
     <div class="moon-halo">
@@ -8,12 +8,15 @@
       <div class="halo halo-2"></div>
     </div>
 
-    <!-- 墨色大字铺底 -->
-    <div class="ink-chars-bg">
-      <span v-for="(c, i) in chars" :key="i" :style="charStyle(i)">{{ c }}</span>
+    <!-- 墨色大字网格（2 行 × 4 列，无重叠） -->
+    <div class="ink-grid">
+      <span v-for="(c, i) in chars" :key="i" class="ink-char"
+            :style="{ '--idx': i, '--rot': rot(i), '--op': op(i) }">
+        {{ c }}
+      </span>
     </div>
 
-    <!-- 远山 SVG（双层 + 山前雾） -->
+    <!-- 远山 SVG -->
     <svg class="mountains-svg" viewBox="0 0 1200 240" preserveAspectRatio="none">
       <defs>
         <linearGradient id="inkFarMountain" x1="0%" y1="0%" x2="0%" y2="100%">
@@ -26,34 +29,28 @@
         </linearGradient>
       </defs>
 
-      <path
-        d="M0 140 Q 80 80 180 110 T 380 95 T 580 120 T 780 100 T 980 115 T 1200 105 L 1200 240 L 0 240 Z"
-        fill="url(#inkFarMountain)" />
-      <path
-        d="M0 180 Q 120 130 260 165 T 540 150 T 820 175 T 1100 160 T 1200 170 L 1200 240 L 0 240 Z"
-        fill="url(#inkNearMountain)" />
-      <path
-        d="M0 220 Q 200 200 400 215 T 800 210 T 1200 220 L 1200 240 L 0 240 Z"
-        fill="#f0e6c8" fill-opacity="0.6" />
+      <path d="M0 140 Q 80 80 180 110 T 380 95 T 580 120 T 780 100 T 980 115 T 1200 105 L 1200 240 L 0 240 Z"
+            fill="url(#inkFarMountain)" />
+      <path d="M0 180 Q 120 130 260 165 T 540 150 T 820 175 T 1100 160 T 1200 170 L 1200 240 L 0 240 Z"
+            fill="url(#inkNearMountain)" />
+      <path d="M0 220 Q 200 200 400 215 T 800 210 T 1200 220 L 1200 240 L 0 240 Z"
+            fill="#f0e6c8" fill-opacity="0.6" />
     </svg>
   </div>
 </template>
 
 <script setup>
-const chars = ['云', '山', '墨', '月', '此', '时', '心', '境', '静']
+// 8 字诗：云山墨月风清远静 —— 子集字体全部支持，无重叠网格排版
+const chars = ['云', '山', '墨', '月', '风', '清', '远', '静']
 
-// 交错定位 + 微调透明度 / 旋转，避免规律感
-function charStyle(i) {
-  const top = (i * 17) % 80
-  const left = (i * 23) % 90
-  const opacity = (0.04 + (i * 0.011) % 0.04).toFixed(3)
-  const rotate = ((i % 5) - 2) * 4
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    opacity,
-    transform: `rotate(${rotate}deg)`,
-  }
+// 微旋转（±4°）和微透明度差异（0.05–0.09）保留手写感
+function rot(i) {
+  const map = [-3, 2, -2, 4, -4, 1, 3, -1]
+  return `${map[i % map.length]}deg`
+}
+function op(i) {
+  const map = [0.07, 0.06, 0.08, 0.05, 0.07, 0.06, 0.08, 0.05]
+  return map[i % map.length]
 }
 </script>
 
@@ -104,24 +101,36 @@ function charStyle(i) {
   50%      { transform: scale(1.15); opacity: 1;   }
 }
 
-/* ---- 墨色大字 ---- */
-.ink-chars-bg {
+/* ---- 墨色大字：2 行 × 4 列等距网格（避开重叠） ---- */
+.ink-grid {
   position: absolute;
   inset: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
   pointer-events: none;
   z-index: 0;
 }
 
-.ink-chars-bg span {
-  position: absolute;
+.ink-char {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: "Liu Jian Mao Cao","Long Cang","Ma Shan Zheng","ZCOOL XiaoWei", cursive;
-  font-size: 96px;
-  color: #18100a;
+  font-size: 80px;
   line-height: 1;
+  color: #18100a;
+  opacity: var(--op);
+  transform: rotate(var(--rot));
   user-select: none;
-  white-space: nowrap;
   filter: blur(0.3px);
 }
+
+/* 让边缘的字稍微靠向内，避免被父容器裁切 */
+.ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; }
+.ink-char:nth-child(4) { justify-content: flex-start; padding-left: 6%; }
+.ink-char:nth-child(5) { justify-content: flex-end; padding-right: 6%; }
+.ink-char:nth-child(8) { justify-content: flex-start; padding-left: 6%; }
 
 /* ---- 远山 ---- */
 .mountains-svg {
@@ -138,7 +147,7 @@ function charStyle(i) {
   .cloud-mountain { height: 160px; }
   .moon-halo      { width: 80px; height: 80px; top: 6%; right: 4%; }
   .moon           { inset: 22px; }
-  .ink-chars-bg span { font-size: 56px; }
-  .mountains-svg     { height: 80px; }
+  .ink-char       { font-size: 48px; }
+  .mountains-svg  { height: 80px; }
 }
 </style>
