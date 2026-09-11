@@ -1,123 +1,266 @@
 <template>
-  <!-- 水墨杨柳 · 飘荡：桌面左右两棵，移动端顶部中央一棵 -->
+  <!-- 水墨杨柳：完整树干 + 斜枝（30–45°）+ 垂叶随风双层飘 -->
   <div class="willow-deco" aria-hidden="true">
 
-    <!-- ==================== 桌面左侧 ==================== -->
-    <svg class="willow left desktop" viewBox="0 0 220 360" preserveAspectRatio="xMidYMin meet">
-      <!-- strand 的包围盒起点各不相同：
-           strand 1: bbox.x=14 → translate(14,0) 把(0,0)挪到顶悬挂点 -->
-      <g class="strands" stroke="#18100a" fill="none" stroke-linecap="round">
-        <g class="strand" style="--dur:5.6s;--delay:0s;--amp:-2.6deg" transform="translate(14,0)">
-          <path d="M 18 0 Q 28 70 20 150 Q 14 230 26 320" stroke-width="1.2" opacity="0.42" />
-          <ellipse cx="18" cy="305" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.55" transform="rotate(-12 18 305)" />
-          <ellipse cx="26" cy="312" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.42" transform="rotate(8 26 312)" />
-          <ellipse cx="14" cy="295" rx="1.2" ry="4"   fill="#18100a" stroke="none" opacity="0.4"  transform="rotate(-20 14 295)" />
-        </g>
-        <g class="strand" style="--dur:6.4s;--delay:0.4s;--amp:2.4deg" transform="translate(46,0)">
-          <path d="M 55 0 Q 66 80 56 170 Q 50 260 60 340" stroke-width="1.4" opacity="0.5" />
-          <ellipse cx="56" cy="320" rx="1.8" ry="5.2" fill="#18100a" stroke="none" opacity="0.6" transform="rotate(-14 56 320)" />
-          <ellipse cx="63" cy="330" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.48" transform="rotate(6 63 330)" />
-          <ellipse cx="50" cy="312" rx="1.4" ry="4.4" fill="#18100a" stroke="none" opacity="0.45" transform="rotate(-22 50 312)" />
-        </g>
-        <g class="strand" style="--dur:7.2s;--delay:0.2s;--amp:-2.8deg" transform="translate(85,0)">
-          <path d="M 95 0 Q 106 100 96 200 Q 90 290 100 350" stroke-width="1.5" opacity="0.55" />
-          <ellipse cx="96" cy="335" rx="2" ry="5.6" fill="#18100a" stroke="none" opacity="0.62" transform="rotate(-20 96 335)" />
-          <ellipse cx="103" cy="346" rx="1.7" ry="5" fill="#18100a" stroke="none" opacity="0.5" transform="rotate(8 103 346)" />
-          <ellipse cx="89" cy="328" rx="1.5" ry="4.8" fill="#18100a" stroke="none" opacity="0.46" transform="rotate(-30 89 328)" />
-        </g>
-        <g class="strand" style="--dur:6.6s;--delay:0.9s;--amp:2.6deg" transform="translate(118,0)">
-          <path d="M 135 0 Q 124 90 132 180 Q 138 270 126 340" stroke-width="1.4" opacity="0.5" />
-          <ellipse cx="132" cy="320" rx="1.8" ry="5.2" fill="#18100a" stroke="none" opacity="0.6" transform="rotate(14 132 320)" />
-          <ellipse cx="124" cy="330" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.48" transform="rotate(-8 124 330)" />
-        </g>
-        <g class="strand" style="--dur:5.9s;--delay:0.6s;--amp:-2.4deg" transform="translate(158,0)">
-          <path d="M 172 0 Q 184 80 174 170 Q 168 260 178 330" stroke-width="1.3" opacity="0.46" />
-          <ellipse cx="174" cy="310" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.52" transform="rotate(-12 174 310)" />
-          <ellipse cx="182" cy="318" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.42" transform="rotate(10 182 318)" />
-        </g>
-        <g class="strand" style="--dur:6.1s;--delay:0.3s;--amp:2.2deg" transform="translate(190,0)">
-          <path d="M 202 0 Q 192 70 200 150 Q 206 230 196 300" stroke-width="1.1" opacity="0.4" />
-          <ellipse cx="198" cy="290" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.45" transform="rotate(-8 198 290)" />
+    <!-- ==================== 桌面左侧整棵树 ==================== -->
+    <svg class="wtree left desktop" viewBox="0 0 260 520" preserveAspectRatio="xMinYMax meet">
+      <defs>
+        <linearGradient id="tgL" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#18100a" stop-opacity="0.60"/>
+          <stop offset="100%" stop-color="#18100a" stop-opacity="0.30"/>
+        </linearGradient>
+      </defs>
+
+      <!-- 树干（轻微弯曲） -->
+      <path d="M 128 518 C 124 430 127 340 124 255 C 122 185 126 115 130 52"
+            stroke="url(#tgL)" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+      <!-- 7 根斜枝：--bx/--by = 枝条挂载点（SVG 坐标），--ba = 摇摆幅度 -->
+      <g class="branch" style="--bx:125px;--by:255px;--bd:6.0s;--bdl:0.0s;--ba:3.5deg">
+        <path d="M 125 255 Q 95 226 65 204" stroke="#18100a" stroke-width="2.0" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <g class="lc" style="--lx:65px;--ly:204px;--ld:4.4s;--lal:0.2s;--la:5deg">
+          <ellipse cx="-2" cy="20" rx="1.8" ry="9"   fill="#18100a" opacity="0.36" transform="rotate(-22 -2 20)"/>
+          <ellipse cx="4"  cy="28" rx="1.6" ry="7.5" fill="#18100a" opacity="0.28" transform="rotate(14 4 28)"/>
+          <ellipse cx="-6" cy="35" rx="1.4" ry="6.5" fill="#18100a" opacity="0.22" transform="rotate(-30 -6 35)"/>
+          <ellipse cx="1"  cy="42" rx="1.3" ry="6"   fill="#18100a" opacity="0.18" transform="rotate(8 1 42)"/>
+          <ellipse cx="-4" cy="50" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(-14 -4 50)"/>
+          <ellipse cx="5"  cy="56" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(18 5 56)"/>
+          <ellipse cx="-3" cy="62" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(-8 -3 62)"/>
         </g>
       </g>
-    </svg>
 
-    <!-- ==================== 桌面右侧（坐标镜像） ==================== -->
-    <svg class="willow right desktop" viewBox="0 0 220 360" preserveAspectRatio="xMidYMin meet">
-      <g class="strands" stroke="#18100a" fill="none" stroke-linecap="round">
-        <!-- bbox.x=14 → translate(14,0) -->
-        <g class="strand" style="--dur:6s;--delay:0.2s;--amp:2.6deg" transform="translate(14,0)">
-          <path d="M 18 0 Q 28 70 20 150 Q 14 230 26 320" stroke-width="1.1" opacity="0.4" />
-          <ellipse cx="22" cy="290" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.45" transform="rotate(8 22 290)" />
-        </g>
-        <!-- bbox.x=38 → translate(38,0) -->
-        <g class="strand" style="--dur:5.8s;--delay:0.7s;--amp:-2.4deg" transform="translate(38,0)">
-          <path d="M 48 0 Q 36 80 46 170 Q 52 260 42 330" stroke-width="1.3" opacity="0.46" />
-          <ellipse cx="46" cy="310" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.52" transform="rotate(12 46 310)" />
-          <ellipse cx="38" cy="318" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.42" transform="rotate(-10 38 318)" />
-        </g>
-        <!-- bbox.x=80 → translate(80,0) -->
-        <g class="strand" style="--dur:6.8s;--delay:0.5s;--amp:2.6deg" transform="translate(80,0)">
-          <path d="M 85 0 Q 96 90 88 180 Q 82 270 94 340" stroke-width="1.4" opacity="0.5" />
-          <ellipse cx="88" cy="320" rx="1.8" ry="5.2" fill="#18100a" stroke="none" opacity="0.6" transform="rotate(-14 88 320)" />
-          <ellipse cx="96" cy="330" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.48" transform="rotate(8 96 330)" />
-        </g>
-        <!-- bbox.x=114 → translate(114,0) -->
-        <g class="strand" style="--dur:7s;--delay:0.1s;--amp:-2.8deg" transform="translate(114,0)">
-          <path d="M 125 0 Q 114 100 124 200 Q 130 290 120 350" stroke-width="1.5" opacity="0.55" />
-          <ellipse cx="124" cy="335" rx="2" ry="5.6" fill="#18100a" stroke="none" opacity="0.62" transform="rotate(20 124 335)" />
-          <ellipse cx="117" cy="346" rx="1.7" ry="5" fill="#18100a" stroke="none" opacity="0.5" transform="rotate(-8 117 346)" />
-          <ellipse cx="131" cy="328" rx="1.5" ry="4.8" fill="#18100a" stroke="none" opacity="0.46" transform="rotate(30 131 328)" />
-        </g>
-        <!-- bbox.x=152 → translate(152,0) -->
-        <g class="strand" style="--dur:6.5s;--delay:0.8s;--amp:2.4deg" transform="translate(152,0)">
-          <path d="M 165 0 Q 154 80 164 170 Q 170 260 160 340" stroke-width="1.4" opacity="0.5" />
-          <ellipse cx="164" cy="320" rx="1.8" ry="5.2" fill="#18100a" stroke="none" opacity="0.6" transform="rotate(14 164 320)" />
-          <ellipse cx="157" cy="330" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.48" transform="rotate(-6 157 330)" />
-        </g>
-        <!-- bbox.x=190 → translate(190,0) -->
-        <g class="strand" style="--dur:5.7s;--delay:0.4s;--amp:-2.6deg" transform="translate(190,0)">
-          <path d="M 202 0 Q 192 70 200 150 Q 206 230 196 300" stroke-width="1.2" opacity="0.42" />
-          <ellipse cx="202" cy="305" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.55" transform="rotate(12 202 305)" />
-          <ellipse cx="194" cy="312" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.42" transform="rotate(-8 194 312)" />
+      <g class="branch" style="--bx:122px;--by:190px;--bd:7.2s;--bdl:0.5s;--ba:-3.0deg">
+        <path d="M 122 190 Q 92 160 62 136" stroke="#18100a" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.50"/>
+        <g class="lc" style="--lx:62px;--ly:136px;--ld:5.0s;--lal:0.7s;--la:4.5deg">
+          <ellipse cx="0"  cy="18" rx="1.7" ry="8"   fill="#18100a" opacity="0.34" transform="rotate(-20 0 18)"/>
+          <ellipse cx="-4" cy="26" rx="1.5" ry="7"   fill="#18100a" opacity="0.26" transform="rotate(16 -4 26)"/>
+          <ellipse cx="3"  cy="33" rx="1.3" ry="6"   fill="#18100a" opacity="0.20" transform="rotate(-26 3 33)"/>
+          <ellipse cx="-2" cy="40" rx="1.2" ry="5.5" fill="#18100a" opacity="0.16" transform="rotate(10 -2 40)"/>
+          <ellipse cx="4"  cy="46" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-14 4 46)"/>
+          <ellipse cx="-1" cy="52" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(6 -1 52)"/>
         </g>
       </g>
-    </svg>
 
-    <!-- ==================== 移动端：顶部中央一棵（更紧凑） ==================== -->
-    <svg class="willow mobile" viewBox="0 0 240 220" preserveAspectRatio="xMidYMin meet">
-      <g class="strands" stroke="#18100a" fill="none" stroke-linecap="round">
-        <!-- bbox.x=22 -->
-        <g class="strand" style="--dur:5.4s;--delay:0s;--amp:-2deg" transform="translate(22,0)">
-          <path d="M 30 0 Q 36 50 28 100 Q 22 150 32 200" stroke-width="1.1" opacity="0.4" />
-          <ellipse cx="28" cy="190" rx="1.3" ry="4" fill="#18100a" stroke="none" opacity="0.5" transform="rotate(-12 28 190)" />
-        </g>
-        <!-- bbox.x=67 -->
-        <g class="strand" style="--dur:6.2s;--delay:0.3s;--amp:2deg" transform="translate(67,0)">
-          <path d="M 75 0 Q 84 60 76 120 Q 70 170 80 210" stroke-width="1.3" opacity="0.5" />
-          <ellipse cx="76" cy="198" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.58" transform="rotate(-16 76 198)" />
-          <ellipse cx="83" cy="206" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.45" transform="rotate(6 83 206)" />
-        </g>
-        <!-- bbox.x=112 -->
-        <g class="strand" style="--dur:7s;--delay:0.1s;--amp:-2.4deg" transform="translate(112,0)">
-          <path d="M 120 0 Q 130 70 122 140 Q 116 190 124 215" stroke-width="1.4" opacity="0.55" />
-          <ellipse cx="122" cy="205" rx="1.7" ry="5" fill="#18100a" stroke="none" opacity="0.62" transform="rotate(-20 122 205)" />
-          <ellipse cx="129" cy="212" rx="1.4" ry="4.4" fill="#18100a" stroke="none" opacity="0.5" transform="rotate(8 129 212)" />
-        </g>
-        <!-- bbox.x=153 -->
-        <g class="strand" style="--dur:6s;--delay:0.5s;--amp:2deg" transform="translate(153,0)">
-          <path d="M 165 0 Q 156 60 164 120 Q 170 170 160 210" stroke-width="1.3" opacity="0.5" />
-          <ellipse cx="164" cy="198" rx="1.5" ry="4.6" fill="#18100a" stroke="none" opacity="0.58" transform="rotate(16 164 198)" />
-          <ellipse cx="157" cy="206" rx="1.3" ry="4.2" fill="#18100a" stroke="none" opacity="0.45" transform="rotate(-6 157 206)" />
-        </g>
-        <!-- bbox.x=202 -->
-        <g class="strand" style="--dur:5.5s;--delay:0.2s;--amp:-2deg" transform="translate(202,0)">
-          <path d="M 210 0 Q 204 50 212 100 Q 218 150 208 200" stroke-width="1.1" opacity="0.4" />
-          <ellipse cx="212" cy="190" rx="1.3" ry="4" fill="#18100a" stroke="none" opacity="0.5" transform="rotate(12 212 190)" />
+      <g class="branch" style="--bx:128px;--by:52px;--bd:5.8s;--bdl:0.2s;--ba:2.8deg">
+        <path d="M 128 52 Q 130 22 142 4" stroke="#18100a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.47"/>
+        <g class="lc" style="--lx:142px;--ly:4px;--ld:4.7s;--lal:0.4s;--la:5.5deg">
+          <ellipse cx="0"  cy="14" rx="1.6" ry="7.5" fill="#18100a" opacity="0.32" transform="rotate(-22 0 14)"/>
+          <ellipse cx="-4" cy="21" rx="1.4" ry="6.5" fill="#18100a" opacity="0.24" transform="rotate(14 -4 21)"/>
+          <ellipse cx="3"  cy="28" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(-18 3 28)"/>
+          <ellipse cx="-2" cy="34" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(8 -2 34)"/>
+          <ellipse cx="4"  cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(-12 4 40)"/>
         </g>
       </g>
+
+      <g class="branch" style="--bx:131px;--by:255px;--bd:6.6s;--bdl:0.8s;--ba:-3.2deg">
+        <path d="M 131 255 Q 162 224 192 200" stroke="#18100a" stroke-width="2.0" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <g class="lc" style="--lx:192px;--ly:200px;--ld:4.9s;--lal:1.0s;--la:-5deg">
+          <ellipse cx="2"  cy="20" rx="1.8" ry="9"   fill="#18100a" opacity="0.36" transform="rotate(22 2 20)"/>
+          <ellipse cx="-4" cy="28" rx="1.6" ry="7.5" fill="#18100a" opacity="0.28" transform="rotate(-14 -4 28)"/>
+          <ellipse cx="6"  cy="35" rx="1.4" ry="6.5" fill="#18100a" opacity="0.22" transform="rotate(30 6 35)"/>
+          <ellipse cx="-1" cy="42" rx="1.3" ry="6"   fill="#18100a" opacity="0.18" transform="rotate(-8 -1 42)"/>
+          <ellipse cx="4"  cy="50" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(14 4 50)"/>
+          <ellipse cx="-5" cy="56" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-18 -5 56)"/>
+          <ellipse cx="3"  cy="62" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(8 3 62)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:134px;--by:190px;--bd:7.0s;--bdl:0.3s;--ba:2.6deg">
+        <path d="M 134 190 Q 166 158 198 132" stroke="#18100a" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.50"/>
+        <g class="lc" style="--lx:198px;--ly:132px;--ld:4.5s;--lal:0.9s;--la:-5deg">
+          <ellipse cx="0"  cy="18" rx="1.7" ry="8"   fill="#18100a" opacity="0.34" transform="rotate(20 0 18)"/>
+          <ellipse cx="4"  cy="26" rx="1.5" ry="7"   fill="#18100a" opacity="0.26" transform="rotate(-16 4 26)"/>
+          <ellipse cx="-3" cy="33" rx="1.3" ry="6"   fill="#18100a" opacity="0.20" transform="rotate(26 -3 33)"/>
+          <ellipse cx="2"  cy="40" rx="1.2" ry="5.5" fill="#18100a" opacity="0.16" transform="rotate(-10 2 40)"/>
+          <ellipse cx="-5" cy="46" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(14 -5 46)"/>
+          <ellipse cx="1"  cy="52" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(-6 1 52)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:131px;--by:315px;--bd:6.3s;--bdl:0.6s;--ba:-3.8deg">
+        <path d="M 131 315 Q 162 286 190 260" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:190px;--ly:260px;--ld:5.2s;--lal:0.5s;--la:-4.5deg">
+          <ellipse cx="1"  cy="16" rx="1.6" ry="7"   fill="#18100a" opacity="0.32" transform="rotate(18 1 16)"/>
+          <ellipse cx="-4" cy="23" rx="1.4" ry="6"   fill="#18100a" opacity="0.24" transform="rotate(-12 -4 23)"/>
+          <ellipse cx="3"  cy="29" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(22 3 29)"/>
+          <ellipse cx="-2" cy="35" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(-16 -2 35)"/>
+          <ellipse cx="4"  cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(10 4 40)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:123px;--by:315px;--bd:5.9s;--bdl:1.0s;--ba:2.4deg">
+        <path d="M 123 315 Q 93 288 64 264" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:64px;--ly:264px;--ld:4.6s;--lal:0.6s;--la:4.5deg">
+          <ellipse cx="-1" cy="16" rx="1.6" ry="7"   fill="#18100a" opacity="0.32" transform="rotate(-18 -1 16)"/>
+          <ellipse cx="4"  cy="23" rx="1.4" ry="6"   fill="#18100a" opacity="0.24" transform="rotate(12 4 23)"/>
+          <ellipse cx="-3" cy="29" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(-22 -3 29)"/>
+          <ellipse cx="2"  cy="35" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(16 2 35)"/>
+          <ellipse cx="-4" cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(-10 -4 40)"/>
+        </g>
+      </g>
+
     </svg>
 
+    <!-- ==================== 桌面右侧整棵树（镜像） ==================== -->
+    <svg class="wtree right desktop" viewBox="0 0 260 520" preserveAspectRatio="xMaxYMax meet">
+      <defs>
+        <linearGradient id="tgR" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="#18100a" stop-opacity="0.30"/>
+          <stop offset="100%" stop-color="#18100a" stop-opacity="0.60"/>
+        </linearGradient>
+      </defs>
+
+      <path d="M 132 518 C 136 430 133 340 136 255 C 138 185 134 115 130 52"
+            stroke="url(#tgR)" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+      <g class="branch" style="--bx:135px;--by:255px;--bd:6.2s;--bdl:0.3s;--ba:-3.5deg">
+        <path d="M 135 255 Q 165 226 195 204" stroke="#18100a" stroke-width="2.0" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <g class="lc" style="--lx:195px;--ly:204px;--ld:4.6s;--lal:0.8s;--la:-5deg">
+          <ellipse cx="2"  cy="20" rx="1.8" ry="9"   fill="#18100a" opacity="0.36" transform="rotate(22 2 20)"/>
+          <ellipse cx="-4" cy="28" rx="1.6" ry="7.5" fill="#18100a" opacity="0.28" transform="rotate(-14 -4 28)"/>
+          <ellipse cx="6"  cy="35" rx="1.4" ry="6.5" fill="#18100a" opacity="0.22" transform="rotate(30 6 35)"/>
+          <ellipse cx="-1" cy="42" rx="1.3" ry="6"   fill="#18100a" opacity="0.18" transform="rotate(-8 -1 42)"/>
+          <ellipse cx="4"  cy="50" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(14 4 50)"/>
+          <ellipse cx="-5" cy="56" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-18 -5 56)"/>
+          <ellipse cx="3"  cy="62" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(8 3 62)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:138px;--by:190px;--bd:7.5s;--bdl:0.7s;--ba:3.0deg">
+        <path d="M 138 190 Q 168 160 198 136" stroke="#18100a" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.50"/>
+        <g class="lc" style="--lx:198px;--ly:136px;--ld:5.1s;--lal:0.3s;--la:-4.5deg">
+          <ellipse cx="0"  cy="18" rx="1.7" ry="8"   fill="#18100a" opacity="0.34" transform="rotate(20 0 18)"/>
+          <ellipse cx="4"  cy="26" rx="1.5" ry="7"   fill="#18100a" opacity="0.26" transform="rotate(-16 4 26)"/>
+          <ellipse cx="-3" cy="33" rx="1.3" ry="6"   fill="#18100a" opacity="0.20" transform="rotate(26 -3 33)"/>
+          <ellipse cx="2"  cy="40" rx="1.2" ry="5.5" fill="#18100a" opacity="0.16" transform="rotate(-10 2 40)"/>
+          <ellipse cx="-5" cy="46" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(14 -5 46)"/>
+          <ellipse cx="1"  cy="52" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(-6 1 52)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:132px;--by:52px;--bd:6.0s;--bdl:0.1s;--ba:-2.8deg">
+        <path d="M 132 52 Q 130 22 118 4" stroke="#18100a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.47"/>
+        <g class="lc" style="--lx:118px;--ly:4px;--ld:4.8s;--lal:0.5s;--la:-5.5deg">
+          <ellipse cx="0"  cy="14" rx="1.6" ry="7.5" fill="#18100a" opacity="0.32" transform="rotate(22 0 14)"/>
+          <ellipse cx="4"  cy="21" rx="1.4" ry="6.5" fill="#18100a" opacity="0.24" transform="rotate(-14 4 21)"/>
+          <ellipse cx="-3" cy="28" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(18 -3 28)"/>
+          <ellipse cx="2"  cy="34" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(-8 2 34)"/>
+          <ellipse cx="-4" cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(12 -4 40)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:129px;--by:255px;--bd:6.8s;--bdl:0.9s;--ba:3.2deg">
+        <path d="M 129 255 Q 98 224 68 200" stroke="#18100a" stroke-width="2.0" fill="none" stroke-linecap="round" opacity="0.55"/>
+        <g class="lc" style="--lx:68px;--ly:200px;--ld:5.0s;--lal:0.2s;--la:5deg">
+          <ellipse cx="-2" cy="20" rx="1.8" ry="9"   fill="#18100a" opacity="0.36" transform="rotate(-22 -2 20)"/>
+          <ellipse cx="4"  cy="28" rx="1.6" ry="7.5" fill="#18100a" opacity="0.28" transform="rotate(14 4 28)"/>
+          <ellipse cx="-6" cy="35" rx="1.4" ry="6.5" fill="#18100a" opacity="0.22" transform="rotate(-30 -6 35)"/>
+          <ellipse cx="1"  cy="42" rx="1.3" ry="6"   fill="#18100a" opacity="0.18" transform="rotate(8 1 42)"/>
+          <ellipse cx="-4" cy="50" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(-14 -4 50)"/>
+          <ellipse cx="5"  cy="56" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(18 5 56)"/>
+          <ellipse cx="-3" cy="62" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(-8 -3 62)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:126px;--by:190px;--bd:7.1s;--bdl:0.4s;--ba:-2.6deg">
+        <path d="M 126 190 Q 94 158 62 132" stroke="#18100a" stroke-width="1.8" fill="none" stroke-linecap="round" opacity="0.50"/>
+        <g class="lc" style="--lx:62px;--ly:132px;--ld:4.6s;--lal:1.1s;--la:5deg">
+          <ellipse cx="0"  cy="18" rx="1.7" ry="8"   fill="#18100a" opacity="0.34" transform="rotate(-20 0 18)"/>
+          <ellipse cx="-4" cy="26" rx="1.5" ry="7"   fill="#18100a" opacity="0.26" transform="rotate(16 -4 26)"/>
+          <ellipse cx="3"  cy="33" rx="1.3" ry="6"   fill="#18100a" opacity="0.20" transform="rotate(-26 3 33)"/>
+          <ellipse cx="-2" cy="40" rx="1.2" ry="5.5" fill="#18100a" opacity="0.16" transform="rotate(10 -2 40)"/>
+          <ellipse cx="5"  cy="46" rx="1.0" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-14 5 46)"/>
+          <ellipse cx="-1" cy="52" rx="0.9" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(6 -1 52)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:129px;--by:315px;--bd:6.5s;--bdl:0.55s;--ba:3.8deg">
+        <path d="M 129 315 Q 98 286 70 260" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:70px;--ly:260px;--ld:5.3s;--lal:0.65s;--la:4.5deg">
+          <ellipse cx="-1" cy="16" rx="1.6" ry="7"   fill="#18100a" opacity="0.32" transform="rotate(-18 -1 16)"/>
+          <ellipse cx="4"  cy="23" rx="1.4" ry="6"   fill="#18100a" opacity="0.24" transform="rotate(12 4 23)"/>
+          <ellipse cx="-3" cy="29" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(-22 -3 29)"/>
+          <ellipse cx="2"  cy="35" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(16 2 35)"/>
+          <ellipse cx="-4" cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(-10 -4 40)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:131px;--by:315px;--bd:6.1s;--bdl:0.85s;--ba:-2.4deg">
+        <path d="M 131 315 Q 162 288 196 264" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:196px;--ly:264px;--ld:4.7s;--lal:0.35s;--la:-4.5deg">
+          <ellipse cx="1"  cy="16" rx="1.6" ry="7"   fill="#18100a" opacity="0.32" transform="rotate(18 1 16)"/>
+          <ellipse cx="-4" cy="23" rx="1.4" ry="6"   fill="#18100a" opacity="0.24" transform="rotate(-12 -4 23)"/>
+          <ellipse cx="3"  cy="29" rx="1.2" ry="5.5" fill="#18100a" opacity="0.18" transform="rotate(22 3 29)"/>
+          <ellipse cx="-2" cy="35" rx="1.1" ry="5"   fill="#18100a" opacity="0.14" transform="rotate(-16 -2 35)"/>
+          <ellipse cx="4"  cy="40" rx="1.0" ry="4"   fill="#18100a" opacity="0.11" transform="rotate(10 4 40)"/>
+        </g>
+      </g>
+
+    </svg>
+
+    <!-- ==================== 移动端：顶部中央一棵 ==================== -->
+    <svg class="wtree mobile" viewBox="0 0 220 320" preserveAspectRatio="xMidYMin meet">
+      <path d="M 108 318 C 105 255 107 190 106 130 C 105 88 107 58 110 24"
+            stroke="#18100a" stroke-width="7" fill="none" stroke-linecap="round" opacity="0.55"/>
+
+      <g class="branch" style="--bx:106px;--by:130px;--bd:5.8s;--bdl:0.0s;--ba:3.2deg">
+        <path d="M 106 130 Q 80 108 55 92" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.52"/>
+        <g class="lc" style="--lx:55px;--ly:92px;--ld:4.2s;--lal:0.3s;--la:4.5deg">
+          <ellipse cx="-2" cy="16" rx="1.5" ry="7"   fill="#18100a" opacity="0.34" transform="rotate(-20 -2 16)"/>
+          <ellipse cx="3"  cy="22" rx="1.3" ry="6"   fill="#18100a" opacity="0.26" transform="rotate(14 3 22)"/>
+          <ellipse cx="-4" cy="28" rx="1.1" ry="5.5" fill="#18100a" opacity="0.20" transform="rotate(-26 -4 28)"/>
+          <ellipse cx="2"  cy="34" rx="1.0" ry="5"   fill="#18100a" opacity="0.16" transform="rotate(10 2 34)"/>
+          <ellipse cx="-3" cy="40" rx="0.9" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-14 -3 40)"/>
+          <ellipse cx="4"  cy="46" rx="0.8" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(18 4 46)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:109px;--by:24px;--bd:6.4s;--bdl:0.4s;--ba:-2.6deg">
+        <path d="M 109 24 Q 109 10 118 4" stroke="#18100a" stroke-width="1.5" fill="none" stroke-linecap="round" opacity="0.46"/>
+        <g class="lc" style="--lx:118px;--ly:4px;--ld:4.7s;--lal:0.6s;--la:5deg">
+          <ellipse cx="0"  cy="12" rx="1.4" ry="6.5" fill="#18100a" opacity="0.30" transform="rotate(-18 0 12)"/>
+          <ellipse cx="-3" cy="18" rx="1.2" ry="5.5" fill="#18100a" opacity="0.22" transform="rotate(12 -3 18)"/>
+          <ellipse cx="2"  cy="24" rx="1.0" ry="5"   fill="#18100a" opacity="0.16" transform="rotate(-14 2 24)"/>
+          <ellipse cx="-1" cy="30" rx="0.9" ry="4"   fill="#18100a" opacity="0.12" transform="rotate(8 -1 30)"/>
+          <ellipse cx="3"  cy="35" rx="0.8" ry="3.5" fill="#18100a" opacity="0.09" transform="rotate(-10 3 35)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:111px;--by:130px;--bd:5.5s;--bdl:0.2s;--ba:2.8deg">
+        <path d="M 111 130 Q 138 108 164 92" stroke="#18100a" stroke-width="1.7" fill="none" stroke-linecap="round" opacity="0.52"/>
+        <g class="lc" style="--lx:164px;--ly:92px;--ld:4.0s;--lal:0.5s;--la:-4.5deg">
+          <ellipse cx="2"  cy="16" rx="1.5" ry="7"   fill="#18100a" opacity="0.34" transform="rotate(20 2 16)"/>
+          <ellipse cx="-3" cy="22" rx="1.3" ry="6"   fill="#18100a" opacity="0.26" transform="rotate(-14 -3 22)"/>
+          <ellipse cx="4"  cy="28" rx="1.1" ry="5.5" fill="#18100a" opacity="0.20" transform="rotate(26 4 28)"/>
+          <ellipse cx="-2" cy="34" rx="1.0" ry="5"   fill="#18100a" opacity="0.16" transform="rotate(-10 -2 34)"/>
+          <ellipse cx="3"  cy="40" rx="0.9" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(14 3 40)"/>
+          <ellipse cx="-4" cy="46" rx="0.8" ry="4"   fill="#18100a" opacity="0.10" transform="rotate(-18 -4 46)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:105px;--by:195px;--bd:6.8s;--bdl:0.6s;--ba:-3.2deg">
+        <path d="M 105 195 Q 80 172 56 155" stroke="#18100a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:56px;--ly:155px;--ld:4.9s;--lal:0.8s;--la:4deg">
+          <ellipse cx="-1" cy="14" rx="1.4" ry="6.5" fill="#18100a" opacity="0.30" transform="rotate(-16 -1 14)"/>
+          <ellipse cx="3"  cy="20" rx="1.2" ry="5.5" fill="#18100a" opacity="0.22" transform="rotate(12 3 20)"/>
+          <ellipse cx="-2" cy="26" rx="1.0" ry="5"   fill="#18100a" opacity="0.16" transform="rotate(-10 -2 26)"/>
+          <ellipse cx="2"  cy="32" rx="0.9" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(8 2 32)"/>
+          <ellipse cx="-3" cy="38" rx="0.8" ry="4"   fill="#18100a" opacity="0.09" transform="rotate(-6 -3 38)"/>
+        </g>
+      </g>
+
+      <g class="branch" style="--bx:112px;--by:195px;--bd:6.2s;--bdl:0.3s;--ba:2.6deg">
+        <path d="M 112 195 Q 138 172 164 155" stroke="#18100a" stroke-width="1.6" fill="none" stroke-linecap="round" opacity="0.45"/>
+        <g class="lc" style="--lx:164px;--ly:155px;--ld:4.5s;--lal:0.7s;--la:-4deg">
+          <ellipse cx="1"  cy="14" rx="1.4" ry="6.5" fill="#18100a" opacity="0.30" transform="rotate(16 1 14)"/>
+          <ellipse cx="-3" cy="20" rx="1.2" ry="5.5" fill="#18100a" opacity="0.22" transform="rotate(-12 -3 20)"/>
+          <ellipse cx="2"  cy="26" rx="1.0" ry="5"   fill="#18100a" opacity="0.16" transform="rotate(10 2 26)"/>
+          <ellipse cx="-2" cy="32" rx="0.9" ry="4.5" fill="#18100a" opacity="0.12" transform="rotate(-8 -2 32)"/>
+          <ellipse cx="3"  cy="38" rx="0.8" ry="4"   fill="#18100a" opacity="0.09" transform="rotate(6 3 38)"/>
+        </g>
+      </g>
+
+    </svg>
   </div>
 </template>
 
@@ -130,50 +273,63 @@
   overflow: hidden;
 }
 
-.willow {
+.wtree {
   position: absolute;
-  top: -6px;
   display: block;
 }
 
-.willow.left.desktop  { left: -10px; width: 220px; height: 360px; }
-.willow.right.desktop { right: -10px; width: 220px; height: 360px; }
-.willow.mobile {
-  top: -6px;
+/* 桌面：树根在底部，吸附视口左右边缘 */
+.wtree.left.desktop  { left: -10px;  bottom: 0; width: 260px; height: 520px; }
+.wtree.right.desktop { right: -10px; bottom: 0; width: 260px; height: 520px; }
+
+/* 移动端：树冠从顶部垂下（锚顶部中央） */
+.wtree.mobile {
+  top: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 240px;
-  height: 220px;
+  width: 220px;
+  height: 320px;
 }
 
-.willow.desktop { display: block; }
-.willow.mobile  { display: none; }
+.wtree.desktop { display: block; }
+.wtree.mobile  { display: none; }
 
 @media (max-width: 768px) {
-  .willow.desktop { display: none; }
-  .willow.mobile  { display: block; }
+  .wtree.desktop { display: none; }
+  .wtree.mobile  { display: block; }
 }
 
-/*
- * 摇摆动画：每根柳条绕其 SVG 顶悬挂点微旋转
- * strand 使用 transform="translate(bboxX,0)" 把(0,0)对齐到悬挂点
- * transform-origin: top left → 绕(0,0)旋转
- */
-.strand {
-  transform-box: fill-box;
-  transform-origin: top left;
-  animation: willow-sway var(--dur, 6s) ease-in-out infinite;
-  animation-delay: var(--delay, 0s);
+/* ===== 枝条绕树干挂载点微旋转 ===== */
+.branch {
+  transform-box: view-box;                     /* SVG 用户坐标 */
+  transform-origin: var(--bx, 0) var(--by, 0); /* 旋转中心 = 枝条挂载点 */
+  animation: branch-sway var(--bd, 6s) ease-in-out infinite;
+  animation-delay: var(--bdl, 0s);
   will-change: transform;
 }
 
-@keyframes willow-sway {
+@keyframes branch-sway {
   0%, 100% { transform: rotate(0deg); }
-  25%      { transform: rotate(var(--amp, -2deg)); }
-  75%      { transform: rotate(calc(-1 * var(--amp, -2deg))); }
+  35%       { transform: rotate(var(--ba, 3deg)); }
+  65%       { transform: rotate(calc(-0.6 * var(--ba, 3deg))); }
+}
+
+/* ===== 垂叶绕枝尾挂载点独立飘荡 ===== */
+.lc {
+  transform-box: view-box;
+  transform-origin: var(--lx, 0) var(--ly, 0);
+  animation: leaf-sway var(--ld, 4.5s) ease-in-out infinite;
+  animation-delay: var(--lal, 0s);
+  will-change: transform;
+}
+
+@keyframes leaf-sway {
+  0%, 100% { transform: rotate(0deg); }
+  40%       { transform: rotate(var(--la, 5deg)); }
+  60%       { transform: rotate(calc(-0.5 * var(--la, 5deg))); }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .strand { animation: none; }
+  .branch, .lc { animation: none; }
 }
 </style>
