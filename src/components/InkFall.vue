@@ -23,7 +23,7 @@ function rand(min, max) { return min + Math.random() * (max - min) }
 function randomize(p, initialY = false) {
   p.x = Math.random() * w
   p.y = initialY ? Math.random() * h : -rand(8, 30)
-  p.size = (w <= 768 ? rand(1.0, 2.4) : rand(1.5, 3.0))
+  p.size = (w <= 768 ? rand(2.5, 6.0) : rand(3.75, 7.5))
   p.baseOpacity = rand(0.25, 0.6)
   p.vy = rand(7, 20)
 
