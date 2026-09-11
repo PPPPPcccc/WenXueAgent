@@ -1,30 +1,13 @@
 <template>
-  <!-- 狂草 · 随机诗句循环书写：在"此时·此刻"下方淡入、笔锋展开、淡出 -->
+  <!-- 狂草 · 随机诗句循环书写：与 MountainDeco 同字体栈 -->
   <div class="brush-poetry" aria-hidden="true">
-    <svg
+    <div
       v-if="currentLine"
-      :key="renderKey"
-      class="brush-svg"
-      viewBox="0 0 600 80"
-      preserveAspectRatio="xMidYMid meet"
-    >
-      <defs>
-        <!-- 飞白笔触感：字符边缘微微颗粒化 -->
-        <filter id="brush-feather" x="-5%" y="-30%" width="110%" height="160%">
-          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="9" />
-          <feDisplacementMap in="SourceGraphic" scale="2.4" />
-          <feGaussianBlur stdDeviation="0.3" />
-        </filter>
-      </defs>
-      <text
-        :x="textX"
-        :y="textY"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        :class="['brush-text', reveal ? 'revealed' : '']"
-        filter="url(#brush-feather)"
-      >{{ currentLine }}</text>
-    </svg>
+      :key="currentKey"
+      ref="lineEl"
+      class="brush-line"
+      :style="{ '--tilt': `${tilt}deg`, '--y': `${y}px` }"
+    >{{ currentLine }}</div>
   </div>
 </template>
 
@@ -42,136 +25,132 @@ const POEMS = [
 ]
 
 const currentLine = ref('')
-const reveal = ref(false)
-const renderKey = ref(0)
-const textX = '50%'
-const textY = '50%'
-
-let timer = null
-let timeoutFadeIn = null
-let timeoutStroke = null
-let timeoutFadeOut = null
+const currentKey = ref(0)
+const lineEl = ref(null)
+let tilt = 0
+let y = 0
+let cancelled = false
 
 function pickPoem() {
-  // 避免连续重复
   let next = POEMS[Math.floor(Math.random() * POEMS.length)]
-  if (POEMS.length > 1) {
-    while (next === currentLine.value) {
-      next = POEMS[Math.floor(Math.random() * POEMS.length)]
-    }
+  while (next === currentLine.value) {
+    next = POEMS[Math.floor(Math.random() * POEMS.length)]
   }
   return next
 }
 
-function step() {
-  // 清场
-  currentLine.value = ''
-  reveal.value = false
-  clearAll()
-  renderKey.value++
-
-  const line = pickPoem()
-  // 短句放中，长句拉宽
-  currentLine.value = line
-
-  // 360ms 淡入
-  timeoutFadeIn = setTimeout(() => {
-    // 触发 .revealed → CSS 跑 1700ms 的 clipPath 笔锋展开
-    reveal.value = true
-  }, 360)
-
-  // 3.5s 后开始 1.3s 淡出
-  timeoutStroke = setTimeout(() => {
-    reveal.value = false
-  }, 360 + 1700 + 1500)
-
-  // 5.6s 后下一句
-  timeoutFadeOut = setTimeout(() => {
-    step()
-  }, 360 + 1700 + 1500 + 1300 + 700)
+// 等待新 DOM 挂载完成（在 :key 变更后下一帧）
+function nextFrame() {
+  return new Promise((resolve) => {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(resolve)
+    })
+  })
 }
 
-function clearAll() {
-  if (timeoutFadeIn)  { clearTimeout(timeoutFadeIn);  timeoutFadeIn  = null }
-  if (timeoutStroke)  { clearTimeout(timeoutStroke);  timeoutStroke  = null }
-  if (timeoutFadeOut) { clearTimeout(timeoutFadeOut); timeoutFadeOut = null }
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms))
+}
+
+async function playLine(line) {
+  if (cancelled) return
+  // 等 Vue 真正把新元素挂到 DOM 上
+  await nextFrame()
+  const el = lineEl.value
+  if (!el || cancelled) return
+
+  const FADE_IN  = 360
+  const STROKE   = 1700
+  const HOLD     = 1500
+  const FADE_OUT = 1300
+  const GAP      = 700
+
+  // 淡入
+  const a1 = el.animate(
+    [{ opacity: 0 }, { opacity: 0.85 }],
+    { duration: FADE_IN, fill: 'forwards', easing: 'ease-out' }
+  )
+
+  // 笔锋扫过
+  const a2 = el.animate(
+    [
+      { clipPath: 'inset(-12% 100% -12% -12%)' },
+      { clipPath: 'inset(-12% -12% -12% -12%)' },
+    ],
+    { duration: STROKE, fill: 'forwards', easing: 'cubic-bezier(0.45, 0, 0.25, 1)' }
+  )
+
+  await sleep(FADE_IN + STROKE + HOLD)
+  if (cancelled) return
+
+  // 淡出
+  const a3 = el.animate(
+    [{ opacity: 0.85 }, { opacity: 0 }],
+    { duration: FADE_OUT, fill: 'forwards' }
+  )
+
+  await sleep(FADE_OUT + GAP)
+}
+
+async function cycle() {
+  while (!cancelled) {
+    const line = pickPoem()
+    tilt = -3 + Math.random() * 6         // 微旋转 ±3°
+    y = -8 + Math.random() * 16           // 微位移 ±8px
+    currentLine.value = line
+    currentKey.value++                     // 强制 :key 变更 → 新 div 挂载
+    await playLine(line)
+  }
 }
 
 onMounted(() => {
-  // 尊重用户的减少动效设置
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   if (reduce) {
-    // 静态显示一句
+    // 不动效：只静态显示一句
     currentLine.value = POEMS[0]
-    reveal.value = true
+    currentKey.value++
     return
   }
-  // 首次延迟 1.5s 等用户进入
-  timer = setTimeout(step, 1500)
+  // 进入页面前 1.2s 稍等，让主标题先安定
+  setTimeout(() => { cycle() }, 1200)
 })
 
-onBeforeUnmount(() => {
-  if (timer) clearTimeout(timer)
-  clearAll()
-})
+onBeforeUnmount(() => { cancelled = true })
 </script>
 
 <style scoped>
+/* 与 MountainDeco 的 ink-chars-bg span 完全相同的字体栈 */
 .brush-poetry {
   position: relative;
   width: 100%;
-  height: 64px;
+  height: 80px;
   margin: 14px auto 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   overflow: hidden;
+  display: block;
 }
 
-.brush-svg {
+.brush-line {
   position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-  animation: poetry-in 360ms ease-out forwards;
-}
-
-.brush-text {
+  left: 0; right: 0;
+  top: 50%;
+  transform: translateY(-50%) rotate(var(--tilt, 0deg)) translateY(var(--y, 0px));
   font-family: "Liu Jian Mao Cao","Long Cang","Ma Shan Zheng","ZCOOL XiaoWei", cursive;
   font-weight: 400;
-  font-size: 38px;
-  fill: #1a1610;
-  letter-spacing: 0.04em;
-
-  /* 初始：只在最右边露出 0% —— 笔锋还未到来 */
-  clip-path: inset(-10% 100% -10% -10%);
-  transition: none;
-}
-
-.brush-text.revealed {
-  /* 笔锋从左扫到右 */
-  animation: brush-write 1700ms cubic-bezier(0.45, 0, 0.25, 1) forwards,
-             poetry-out 1300ms ease-in forwards 1700ms;
-}
-
-@keyframes poetry-in {
-  from { opacity: 0; }
-  to   { opacity: 0.9; }
-}
-
-@keyframes brush-write {
-  from { clip-path: inset(-10% 100% -10% -10%); }
-  to   { clip-path: inset(-10% -10% -10% -10%); }
-}
-
-@keyframes poetry-out {
-  from { opacity: 0.9; }
-  to   { opacity: 0; }
+  font-size: 42px;
+  color: #1a1610;
+  letter-spacing: 0.06em;
+  line-height: 1;
+  white-space: nowrap;
+  text-align: center;
+  opacity: 0;                              /* 初始由 WAAPI 接管 */
+  filter: blur(0.3px);                     /* 与 MountainDeco 同款柔化 */
+  clip-path: inset(-12% 100% -12% -12%);   /* 初始被全裁，由 WAAPI 扫开 */
+  user-select: none;
+  will-change: opacity, clip-path;
 }
 
 @media (max-width: 768px) {
-  .brush-poetry { height: 56px; margin-top: 10px; }
-  .brush-text   { font-size: 28px; }
+  .brush-poetry { height: 62px; margin-top: 10px; }
+  .brush-line   { font-size: 30px; }
 }
 </style>
