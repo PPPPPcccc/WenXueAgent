@@ -189,18 +189,18 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .part-label {
   font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
+  font-size: 12px;
   letter-spacing: 0.2em;
   color: var(--ink-60);
 }
 
 .part-seal {
-  font-size: 10px;
+  font-size: 9px;
   letter-spacing: 0.2em;
   color: var(--ink-20);
   text-transform: uppercase;
@@ -210,11 +210,11 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 .part-content {
   font-family: 'Noto Serif SC', 'KaiTi', 'STKaiti', serif;
   color: var(--ink-100);
-  line-height: 1.85;
+  line-height: 1.55;        /* 原 1.85 → 1.55，整体高度 -1/6 */
   letter-spacing: 0.04em;
 }
 
-.part1-text { font-size: 15px; }
+.part1-text { font-size: 13px; }   /* 原 15px → 13px */
 
 /* ===== 选中引用展示 ===== */
 .selected-quote-wrap {
@@ -222,18 +222,18 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 }
 
 .selected-quote {
-  font-size: 20px;
+  font-size: 17px;              /* 原 20 → 17 */
   font-weight: 500;
   color: var(--ink-100);
   position: relative;
-  padding: 14px 0 14px 28px;
+  padding: 12px 0 12px 24px;    /* 原 14 0 14 28 → 12 0 12 24 */
   border-left: 3px solid var(--vermilion);
   background: linear-gradient(90deg,
     rgba(168, 50, 58, 0.04) 0%,
     transparent 60%);
   margin: 0;
   letter-spacing: 0.08em;
-  line-height: 1.6;
+  line-height: 1.35;            /* 原 1.6 → 1.35 */
 }
 
 .selected-quote::before {
@@ -241,7 +241,7 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   position: absolute;
   left: 8px;
   top: -2px;
-  font-size: 36px;
+  font-size: 30px;              /* 原 36 → 30 */
   color: var(--vermilion);
   font-family: 'KaiTi', 'STKaiti', serif;
   line-height: 1;
@@ -252,7 +252,7 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   position: absolute;
   right: 12px;
   bottom: -4px;
-  font-size: 36px;
+  font-size: 30px;              /* 原 36 → 30 */
   color: var(--vermilion);
   font-family: 'KaiTi', 'STKaiti', serif;
   line-height: 1;
@@ -265,25 +265,25 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 }
 
 .quote-source {
-  font-size: 12px;
+  font-size: 11px;              /* 原 12 → 11 */
   color: var(--ink-40);
   text-align: right;
-  margin-top: 8px;
+  margin-top: 7px;              /* 原 8 → 7 */
   letter-spacing: 0.1em;
 }
 
 /* ===== 叁 · 情景解读 ===== */
 .part-3-interpretation .part-header {
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
 
 .interpretation-text {
-  font-size: 15px;
-  line-height: 1.95;
+  font-size: 13px;              /* 原 15 → 13 */
+  line-height: 1.6;             /* 原 1.95 → 1.6 */
   letter-spacing: 0.04em;
   color: var(--ink-100);
   font-family: 'Noto Serif SC', 'KaiTi', 'STKaiti', serif;
-  padding: 14px 18px;
+  padding: 12px 15px;           /* 原 14px 18px → 12px 15px */
   background: rgba(176, 140, 60, 0.06);
   border-left: 3px solid var(--ochre);
   border-radius: 0 4px 4px 0;
@@ -294,18 +294,18 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 /* ===== 肆 · 古人各异（4 卡片） ===== */
 .plural-hint {
   font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
+  font-size: 12px;              /* 原 13 → 12 */
   color: var(--ink-40);
   letter-spacing: 0.15em;
   font-style: italic;
-  margin-bottom: 12px;
+  margin-bottom: 10px;          /* 原 12 → 10 */
   text-align: center;
 }
 
 .quotes-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 8px;                     /* 原 10 → 8 */
 }
 
 .quote-card-btn {
@@ -314,15 +314,15 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 10px 6px;
+  padding: 8px 5px;             /* 原 10px 6px → 8px 5px */
   background: var(--paper);
   border: 1.5px solid var(--ink-10);
   border-radius: var(--radius);
   cursor: pointer;
   transition: all 0.25s var(--ease);
   text-align: center;
-  gap: 4px;
-  min-height: 68px;
+  gap: 3px;                     /* 原 4 → 3 */
+  min-height: 57px;             /* 原 68 → 57 */
   box-shadow: 0 1px 3px rgba(26, 26, 26, 0.05);
 }
 
@@ -355,7 +355,7 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 
 .quote-card-book {
   font-family: 'Noto Serif SC', serif;
-  font-size: 13px;
+  font-size: 11px;              /* 原 13 → 11 */
   font-weight: 600;
   color: var(--ink-80);
   letter-spacing: 0.1em;
@@ -378,13 +378,13 @@ watch(() => props.reply, () => { activeIndex.value = 0 }, { immediate: true })
 @media (max-width: 768px) {
   .reply-card::after { display: none; }
   .reply-part { padding-right: 0; }
-  .selected-quote { font-size: 17px; padding-left: 24px; }
+  .selected-quote { font-size: 15px; padding: 10px 0 10px 22px; }
   .quotes-grid {
     grid-template-columns: repeat(2, 1fr);
-    gap: 8px;
+    gap: 7px;
   }
-  .quote-card-btn { min-height: 60px; }
-  .quote-card-book { font-size: 12px; }
-  .quote-card-preview { font-size: 10px; }
+  .quote-card-btn { min-height: 50px; }
+  .quote-card-book { font-size: 10px; }
+  .quote-card-preview { font-size: 9px; }
 }
 </style>
