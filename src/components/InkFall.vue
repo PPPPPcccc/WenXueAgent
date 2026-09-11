@@ -19,20 +19,45 @@ const COLORS = ['#18100a', '#241a10', '#312517', '#1d150d']
 
 function rand(min, max) { return min + Math.random() * (max - min) }
 
-/** 随机化单个粒子（含树叶形状参数） */
+/** 出生方位：60% 顶部飘下，20% 左，20% 右 */
+function pickSpawnSide() {
+  const r = Math.random()
+  if (r < 0.6) return 'top'
+  if (r < 0.8) return 'left'
+  return 'right'
+}
+
+/** 随机化单个粒子（含树叶形状参数 + 出生方位） */
 function randomize(p, initialY = false) {
-  p.x = Math.random() * w
-  p.y = initialY ? Math.random() * h : -rand(8, 30)
+  const side = pickSpawnSide()
+  p.spawnSide = side
+
+  if (side === 'left') {
+    p.baseVx = rand(10, 28)         // 向右漂
+    p.vy     = rand(4, 14)          // 略微下飘
+    p.x = -rand(8, 30)
+    p.y = Math.random() * h
+  } else if (side === 'right') {
+    p.baseVx = -rand(10, 28)        // 向左漂
+    p.vy     = rand(4, 14)
+    p.x = w + rand(8, 30)
+    p.y = Math.random() * h
+  } else {                          // top
+    p.baseVx = 0
+    p.vy     = rand(7, 20)
+    p.x = Math.random() * w
+    p.y = initialY ? Math.random() * h : -rand(8, 30)
+  }
+
   p.size = (w <= 768 ? rand(2.5, 6.0) : rand(3.75, 7.5))
   p.baseOpacity = rand(0.25, 0.6)
-  p.vy = rand(7, 20)
 
   // 树叶形状参数（5 个独立维度 → 每片叶子都不一样）
-  p.leafLen  = rand(1.05, 1.35)   // 长度比例
-  p.leafWR   = rand(0.40, 0.62)   // 右半宽
-  p.leafWL   = rand(0.40, 0.62)   // 左半宽（≠WR → 不对称叶）
-  p.leafTip  = rand(-0.10, 0.10)  // 叶尖 x 偏移
-  p.leafStem = rand(-0.10, 0.10)  // 叶柄 x 偏移
+  p.leafLen  = rand(1.05, 1.35)
+  p.leafWR   = rand(0.40, 0.62)
+  p.leafWL   = rand(0.40, 0.62)
+  p.leafTip  = rand(-0.10, 0.10)
+  p.leafStem = rand(-0.10, 0.10)
 
   // 三组不可通约频率的正弦摆动 → 不规则轨迹
   p.p1 = rand(0, Math.PI * 2); p.f1 = rand(0.25, 0.65); p.a1 = rand(10, 26)
@@ -44,7 +69,7 @@ function randomize(p, initialY = false) {
   p.maxLife = rand(8, 26)
 
   p.color = COLORS[Math.floor(Math.random() * COLORS.length)]
-  p.angle = 0   // 每帧根据运动方向重算
+  p.angle = 0
 }
 
 function initCanvas() {
@@ -99,6 +124,7 @@ function update(dt) {
     const p = particles[i]
 
     const vx =
+      p.baseVx +
       slowWind + gust +
       Math.sin(windT * p.f1 + p.p1) * p.a1 +
       Math.sin(windT * p.f2 + p.p2) * p.a2 +
@@ -166,8 +192,8 @@ onMounted(() => {
 
   initCanvas()
 
-  // 数量减少 1/3（原 120 / 60 → 80 / 40）
-  const count = w <= 768 ? 40 : 80
+  // 数量再减少 1/3（原 80 / 40 → 53 / 27）
+  const count = w <= 768 ? 27 : 53
   for (let i = 0; i < count; i++) {
     const p = {}
     randomize(p, true)
