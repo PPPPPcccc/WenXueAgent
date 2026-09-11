@@ -8,10 +8,10 @@
       <div class="halo halo-2"></div>
     </div>
 
-    <!-- 墨色大字网格（2 行 × 4 列，无重叠） -->
+    <!-- 墨色大字网格（2 行 × 4 列，无重叠）：缓慢书写动画 -->
     <div class="ink-grid">
       <span v-for="(c, i) in chars" :key="i" class="ink-char"
-            :style="{ '--idx': i, '--rot': rot(i), '--op': op(i) }">
+            :style="{ '--idx': i, '--rot': rot(i) }">
         {{ c }}
       </span>
     </div>
@@ -43,14 +43,10 @@
 // 8 字诗：云山墨月风清远静 —— 子集字体全部支持，无重叠网格排版
 const chars = ['云', '山', '墨', '月', '风', '清', '远', '静']
 
-// 微旋转（±4°）和微透明度差异（0.05–0.09）保留手写感
+// 微旋转（±4°）保留手写感
 function rot(i) {
   const map = [-3, 2, -2, 4, -4, 1, 3, -1]
   return `${map[i % map.length]}deg`
-}
-function op(i) {
-  const map = [0.07, 0.06, 0.08, 0.05, 0.07, 0.06, 0.08, 0.05]
-  return map[i % map.length]
 }
 </script>
 
@@ -124,17 +120,95 @@ function op(i) {
   font-size: 80px;
   line-height: 1;
   color: #18100a;
-  opacity: var(--op);
+  /* 初始：淡灰、被右裁（未书写） */
+  opacity: 0.08;
+  clip-path: inset(-12% 100% -12% -12%);
   transform: rotate(var(--rot));
   user-select: none;
   filter: blur(0.3px);
+  animation: writeHoldFade 12s var(--ease) infinite both;
 }
 
+/* 每字用专属 keyframe，错开书写时机；所有字在 33% 写完，一起 hold、一起 fade */
+
 /* 让边缘的字稍微靠向内，避免被父容器裁切 */
-.ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; }
-.ink-char:nth-child(4) { justify-content: flex-start; padding-left: 6%; }
-.ink-char:nth-child(5) { justify-content: flex-end; padding-right: 6%; }
-.ink-char:nth-child(8) { justify-content: flex-start; padding-left: 6%; }
+.ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; animation-name: writeChar1; }
+.ink-char:nth-child(2) { justify-content: center;  animation-name: writeChar2; }
+.ink-char:nth-child(3) { justify-content: center;  animation-name: writeChar3; }
+.ink-char:nth-child(4) { justify-content: flex-start; padding-left: 6%; animation-name: writeChar4; }
+.ink-char:nth-child(5) { justify-content: flex-end; padding-right: 6%; animation-name: writeChar5; }
+.ink-char:nth-child(6) { justify-content: center;  animation-name: writeChar6; }
+.ink-char:nth-child(7) { justify-content: center;  animation-name: writeChar7; }
+.ink-char:nth-child(8) { justify-content: flex-start; padding-left: 6%; animation-name: writeChar8; }
+
+/* 关键帧模板：
+   0%   - 淡灰、被右裁（未写）
+   N%   - 字 N 开始书写（仍淡灰、被右裁）
+   M%   - 字 N 完成书写（深黑、完全展开）
+   70%  - 全部书写完成，深黑
+   85%  - 整体淡化到 0
+   100% - 保持 0 等待循环 */
+@keyframes writeChar1 {
+  0%   { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  5%   { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%  { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%  { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100% { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar2 {
+  0%, 4% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  9%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%   { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar3 {
+  0%, 8% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  13%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%   { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar4 {
+  0%, 12% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  17%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%     { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar5 {
+  0%, 16% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  21%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%     { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar6 {
+  0%, 20% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  25%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%     { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar7 {
+  0%, 24% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  29%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%     { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+@keyframes writeChar8 {
+  0%, 28% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  33%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
+  85%     { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+  100%    { opacity: 0;    clip-path: inset(-12% -12% -12% -12%); }
+}
+
+/* 占位 keyframe，避免被覆盖警告（实际未引用） */
+@keyframes writeHoldFade {
+  0%, 100% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+}
 
 /* ---- 远山 ---- */
 .mountains-svg {
