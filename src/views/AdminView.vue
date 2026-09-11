@@ -82,7 +82,9 @@
         </label>
         <div class="modal-actions">
           <button class="btn-ghost" @click="closeEditor">取消</button>
-          <button class="btn-ink" @click="saveEdit">保存</button>
+          <button class="btn-ink" :disabled="savingEdit" @click="saveEdit">
+            {{ savingEdit ? '生成向量中…' : '保存' }}
+          </button>
         </div>
       </div>
     </div>
@@ -130,9 +132,10 @@ import { ref, computed, onMounted } from 'vue'
 import { useClassics } from '@/composables/useClassics'
 import { userClassicsStore } from '@/lib/store'
 import { parseText, exportText, makeId } from '@/lib/classics-io'
+import { embedTexts } from '@/api'
 import MountainDeco from '@/components/MountainDeco.vue'
 
-const { classics, books, load: loadClassics, refresh } = useClassics()
+const { classics, books, load: loadClassics, refresh, allEmbeddings, loadInitialEmbeddings } = useClassics()
 
 const items = ref([])
 const keyword = ref('')
@@ -152,6 +155,7 @@ const importResult = ref('')
 
 const editorOpen = ref(false)
 const editing = ref({ id: '', book: '', chapter: '', quote: '', tagInput: '' })
+const savingEdit = ref(false)   // 保存时是否有 embedding 生成中
 
 const hasMore = computed(() => offset.value < items.value.length || items.value.length === totalFiltered.value)
 
@@ -209,7 +213,7 @@ const closeEditor = () => {
   editorOpen.value = false
 }
 
-const saveEdit = () => {
+const saveEdit = async () => {
   const payload = {
     book: editing.value.book.trim(),
     chapter: editing.value.chapter.trim(),
@@ -220,21 +224,36 @@ const saveEdit = () => {
     alert('书名 / 章节 / 名句 必填')
     return
   }
-  const id = editing.value.id || makeId(payload.book, payload.chapter, payload.quote)
-  if (editing.value.id) {
-    userClassicsStore.update(id, payload)
-  } else {
-    userClassicsStore.add({ id, ...payload, char_count: payload.quote.length })
+  savingEdit.value = true
+  try {
+    // 生成这条名句的向量
+    let embedding = null
+    try {
+      const emb = await embedTexts([payload.quote])
+      embedding = emb[0] || null
+    } catch (err) {
+      console.warn('Embedding 生成失败，将无法用于 RAG 向量检索：', err.message)
+    }
+
+    const id = editing.value.id || makeId(payload.book, payload.chapter, payload.quote)
+    const item = { id, ...payload, char_count: payload.quote.length }
+    if (embedding) item._embedding = embedding
+
+    if (editing.value.id) {
+      userClassicsStore.update(id, { ...payload, char_count: payload.quote.length })
+    } else {
+      userClassicsStore.add(item)
+    }
+    editorOpen.value = false
+    refresh()
+    load()
+  } finally {
+    savingEdit.value = false
   }
-  editorOpen.value = false
-  refresh()
-  load()
 }
 
 const deleteItem = (item) => {
   if (!confirm(`确认删除 "${item.book}|${item.chapter}|${item.quote.slice(0, 16)}..." ？`)) return
-  // 无论是不是初始库里的，都走 store.remove
-  // store.remove 会在删除用户项时把 id 加入 removedIds（初始项用此机制隐藏）
   userClassicsStore.remove(item.id)
   refresh()
   load()
@@ -264,20 +283,36 @@ const onFileSelected = async (e) => {
   }
 }
 
-const doImport = () => {
+const doImport = async () => {
   importing.value = true
   importResult.value = ''
   try {
     const text = importTab.value === 'paste' ? importContent.value : importFileContent.value
     const records = parseText(text)
-    let added = 0
-    let skipped = 0
-    for (const rec of records) {
-      const ok = userClassicsStore.add({ ...rec, char_count: rec.quote.length })
-      if (ok) added++
+
+    // 批量生成 embedding
+    let allEmbeddings = null
+    try {
+      allEmbeddings = await embedTexts(records.map((r) => r.quote))
+    } catch (err) {
+      console.warn('批量 embedding 生成失败，将跳过向量生成：', err.message)
+    }
+
+    let added = 0, skipped = 0
+    for (let i = 0; i < records.length; i++) {
+      const rec = records[i]
+      const item = { ...rec, char_count: rec.quote.length }
+      if (allEmbeddings && allEmbeddings[i]) {
+        item._embedding = allEmbeddings[i]
+      }
+      if (userClassicsStore.add(item)) added++
       else skipped++
     }
+
     importResult.value = `导入完成：新增 ${added} 条${skipped ? `，跳过重复 ${skipped} 条` : ''}`
+    if (!allEmbeddings) {
+      importResult.value += '（向量生成失败，向量检索暂不可用）'
+    }
     importContent.value = ''
     importFileContent.value = ''
     importFileName.value = ''
@@ -308,6 +343,8 @@ const fileInput = ref(null)
 
 onMounted(async () => {
   await loadClassics()
+  // 确保初始 embeddings 已加载（供后续新建/导入时参考）
+  await loadInitialEmbeddings()
   ready.value = true
   load()
 })

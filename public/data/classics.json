@@ -345,17 +345,6 @@
     "char_count": 17
   },
   {
-    "id": "c_afbc9b5",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"可也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_21387d02",
     "book": "论语",
     "chapter": "论语",
@@ -553,17 +542,6 @@
     "char_count": 16
   },
   {
-    "id": "c_b0210f7",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"色难",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_f8da26ef",
     "book": "论语",
     "chapter": "论语",
@@ -620,18 +598,6 @@
       "论语"
     ],
     "char_count": 16
-  },
-  {
-    "id": "c_e742abc9",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"君子不器。",
-    "tags": [
-      "儒家",
-      "君子",
-      "论语"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_27c1a312",
@@ -946,17 +912,6 @@
     "char_count": 12
   },
   {
-    "id": "c_95330c7a",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "对曰:\"不能",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_c1c7d304",
     "book": "论语",
     "chapter": "论语",
@@ -991,29 +946,6 @@
       "论语"
     ],
     "char_count": 26
-  },
-  {
-    "id": "c_d0a8c758",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"绘事后素",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_e8494a0f",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"礼后乎",
-    "tags": [
-      "儒家",
-      "礼",
-      "论语"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_8a2852c5",
@@ -1060,17 +992,6 @@
       "论语"
     ],
     "char_count": 19
-  },
-  {
-    "id": "c_6a61a298",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"不知也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_c3258f6a",
@@ -1687,17 +1608,6 @@
     "char_count": 13
   },
   {
-    "id": "c_af8788f4",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曾子曰:\"唯",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_417b8ca4",
     "book": "论语",
     "chapter": "论语",
@@ -1879,39 +1789,6 @@
     "char_count": 10
   },
   {
-    "id": "c_6a8dce61",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"女器也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
-    "id": "c_e7975813",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"何器也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_e838a4df",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"瑚琏也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_d9c3d491",
     "book": "论语",
     "chapter": "论语",
@@ -1922,17 +1799,6 @@
       "论语"
     ],
     "char_count": 10
-  },
-  {
-    "id": "c_6af61b36",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"焉用佞",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_5839148a",
@@ -2108,28 +1974,6 @@
     "char_count": 26
   },
   {
-    "id": "c_f13975af",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"吾未见刚者",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
-    "id": "c_7efaef01",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "或对曰:\"申枨",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_6c1bae06",
     "book": "论语",
     "chapter": "论语",
@@ -2265,41 +2109,6 @@
     "char_count": 13
   },
   {
-    "id": "c_afd7d4a",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"忠矣",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_e7993349",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"仁矣乎",
-    "tags": [
-      "仁",
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_510e9353",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"未知,焉得仁",
-    "tags": [
-      "仁",
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_948210c7",
     "book": "论语",
     "chapter": "论语",
@@ -2331,28 +2140,6 @@
       "论语"
     ],
     "char_count": 16
-  },
-  {
-    "id": "c_754a629d",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "'违之,何如",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_aff500f",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"清矣",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_882a66af",
@@ -2566,17 +2353,6 @@
       "论语"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_ddd1af35",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"雍之言然",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_eed57e3d",
@@ -2833,17 +2609,6 @@
     "char_count": 26
   },
   {
-    "id": "c_ff35b502",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "贤哉,回也!",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_89b1c1d5",
     "book": "论语",
     "chapter": "论语",
@@ -3050,17 +2815,6 @@
       "论语"
     ],
     "char_count": 19
-  },
-  {
-    "id": "c_89c6cb41",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"何为其然也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_b25afbbd",
@@ -3387,17 +3141,6 @@
     "char_count": 13
   },
   {
-    "id": "c_79ede643",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"古之贤人也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
     "id": "c_b7c62baf",
     "book": "论语",
     "chapter": "论语",
@@ -3697,18 +3440,6 @@
     "char_count": 11
   },
   {
-    "id": "c_c1b4f6fc",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "孔子曰:\"知礼",
-    "tags": [
-      "儒家",
-      "礼",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_5e288ae1",
     "book": "论语",
     "chapter": "论语",
@@ -3816,28 +3547,6 @@
     "book": "论语",
     "chapter": "论语",
     "quote": "子疾病,子路请祷",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_afe7da8",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"有诸",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_a383ef83",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子路对曰:\"有之",
     "tags": [
       "儒家",
       "论语"
@@ -4550,17 +4259,6 @@
     "char_count": 16
   },
   {
-    "id": "c_f0dabbca",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"吾有知乎哉",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_912f7ca6",
     "book": "论语",
     "chapter": "论语",
@@ -4728,17 +4426,6 @@
       "论语"
     ],
     "char_count": 17
-  },
-  {
-    "id": "c_66138a66",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "或曰:\"陋,如之何",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_8eff1ec3",
@@ -5058,17 +4745,6 @@
     "char_count": 15
   },
   {
-    "id": "c_1d15283a",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "趋进,翼如也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_807cfa7c",
     "book": "论语",
     "chapter": "论语",
@@ -5166,18 +4842,6 @@
       "论语"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_d8f8aab2",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "享礼,有容色",
-    "tags": [
-      "儒家",
-      "礼",
-      "论语"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_3cfbe9d7",
@@ -5424,17 +5088,6 @@
       "论语"
     ],
     "char_count": 14
-  },
-  {
-    "id": "c_58b47a53",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "席不正,不坐。",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_e8ff3a21",
@@ -5918,18 +5571,6 @@
     "char_count": 20
   },
   {
-    "id": "c_a3ffb94e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": ",曰:\"敢问死",
-    "tags": [
-      "儒家",
-      "生死",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_7995037a",
     "book": "论语",
     "chapter": "论语",
@@ -6029,28 +5670,6 @@
       "论语"
     ],
     "char_count": 12
-  },
-  {
-    "id": "c_8dd06b44",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"然则师愈与",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_da8ade1e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"过犹不及",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_584f29e3",
@@ -6153,17 +5772,6 @@
     "char_count": 9
   },
   {
-    "id": "c_ddc1ace8",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"闻斯行之",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
     "id": "c_cba3db76",
     "book": "论语",
     "chapter": "论语",
@@ -6173,28 +5781,6 @@
       "论语"
     ],
     "char_count": 26
-  },
-  {
-    "id": "c_2f191c1a",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰'闻斯行之'",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_54004e5b",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "赤也惑,敢问",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_7b42921c",
@@ -6431,18 +6017,6 @@
     "char_count": 23
   },
   {
-    "id": "c_6a61d4ee",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"何伤乎",
-    "tags": [
-      "儒家",
-      "悲伤",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_77079521",
     "book": "论语",
     "chapter": "论语",
@@ -6614,17 +6188,6 @@
       "论语"
     ],
     "char_count": 10
-  },
-  {
-    "id": "c_c10ea3e6",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "颜渊曰:\"请问其目",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_241f46e9",
@@ -7462,17 +7025,6 @@
     "char_count": 10
   },
   {
-    "id": "c_da04854e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"举尔所知",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_bf913932",
     "book": "论语",
     "chapter": "论语",
@@ -7779,28 +7331,6 @@
     "char_count": 12
   },
   {
-    "id": "c_95362938",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "对曰:\"有政",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_6a6acfa7",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"其事也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_5ae16322",
     "book": "论语",
     "chapter": "论语",
@@ -8013,17 +7543,6 @@
     "char_count": 22
   },
   {
-    "id": "c_e7a8db7e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"敢问其次",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_5922add2",
     "book": "论语",
     "chapter": "论语",
@@ -8104,17 +7623,6 @@
     "char_count": 15
   },
   {
-    "id": "c_762dfb35",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"不占而已矣",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_4ef7970b",
     "book": "论语",
     "chapter": "论语",
@@ -8137,17 +7645,6 @@
       "论语"
     ],
     "char_count": 14
-  },
-  {
-    "id": "c_6ac7d43f",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"未可也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_1bf2a1b0",
@@ -8552,17 +8049,6 @@
     "char_count": 29
   },
   {
-    "id": "c_afb9af3",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"其然",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_b918f771",
     "book": "论语",
     "chapter": "论语",
@@ -8963,17 +8449,6 @@
     "char_count": 11
   },
   {
-    "id": "c_b69e659d",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"何以报德",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
     "id": "c_30045e15",
     "book": "论语",
     "chapter": "论语",
@@ -9074,17 +8549,6 @@
     "char_count": 23
   },
   {
-    "id": "c_a5806408",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"作者七人矣",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_7525af1e",
     "book": "论语",
     "chapter": "论语",
@@ -9094,17 +8558,6 @@
       "论语"
     ],
     "char_count": 14
-  },
-  {
-    "id": "c_f6bd2143",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子路曰:\"自孔氏",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_303e8561",
@@ -9217,28 +8670,6 @@
       "论语"
     ],
     "char_count": 14
-  },
-  {
-    "id": "c_ec315ad4",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"如斯而已乎",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_39ce6a3e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "曰:\"修己以安人",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_73a12c15",
@@ -9365,17 +8796,6 @@
       "论语"
     ],
     "char_count": 18
-  },
-  {
-    "id": "c_bf5fa99e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "对曰:\"然,非与",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_4ba1cd07",
@@ -9964,17 +9384,6 @@
     "char_count": 15
   },
   {
-    "id": "c_43b98026",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"有教无类。",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_2098c7cb",
     "book": "论语",
     "chapter": "论语",
@@ -9984,17 +9393,6 @@
       "论语"
     ],
     "char_count": 13
-  },
-  {
-    "id": "c_71ddb166",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"辞达而已矣。",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 10
   },
   {
     "id": "c_1d258812",
@@ -10496,17 +9894,6 @@
     "char_count": 15
   },
   {
-    "id": "c_95361699",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "对曰:\"未也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_6d54c0d7",
     "book": "论语",
     "chapter": "论语",
@@ -10519,17 +9906,6 @@
     "char_count": 18
   },
   {
-    "id": "c_d05542a5",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "'对曰:'未也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_40edfd89",
     "book": "论语",
     "chapter": "论语",
@@ -10539,17 +9915,6 @@
       "论语"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_d84f7c54",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "'鲤退而学《诗》",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_b7767d6e",
@@ -10575,18 +9940,6 @@
       "论语"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_d84d1659",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "'鲤退而学《礼》",
-    "tags": [
-      "儒家",
-      "礼",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_db37b6b",
@@ -10864,17 +10217,6 @@
     "char_count": 16
   },
   {
-    "id": "c_50eeaae0",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"然,有是言也",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 10
-  },
-  {
     "id": "c_79b5e4a2",
     "book": "论语",
     "chapter": "论语",
@@ -11135,17 +10477,6 @@
     "char_count": 29
   },
   {
-    "id": "c_b6a6f461",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"予欲无言",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
-  },
-  {
     "id": "c_9fb26719",
     "book": "论语",
     "chapter": "论语",
@@ -11155,17 +10486,6 @@
       "论语"
     ],
     "char_count": 16
-  },
-  {
-    "id": "c_bc08f32e",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"天何言哉",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_c41bcdff",
@@ -11297,17 +10617,6 @@
       "论语"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_afe5226",
-    "book": "论语",
-    "chapter": "论语",
-    "quote": "子曰:\"有恶",
-    "tags": [
-      "儒家",
-      "论语"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_211e6222",
@@ -13260,17 +12569,6 @@
     "char_count": 10
   },
   {
-    "id": "c_7b323857",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子见梁惠王",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_63667b4c",
     "book": "孟子",
     "chapter": "孟子",
@@ -14065,17 +13363,6 @@
     "char_count": 8
   },
   {
-    "id": "c_7b376d3b",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子见梁襄王",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_fcffdcc",
     "book": "孟子",
     "chapter": "孟子",
@@ -14244,17 +13531,6 @@
     "char_count": 27
   },
   {
-    "id": "c_5af0195e",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "无以，则王乎",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_dddd73",
     "book": "孟子",
     "chapter": "孟子",
@@ -14366,17 +13642,6 @@
     "char_count": 8
   },
   {
-    "id": "c_52635292",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“有之",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_30b84db6",
     "book": "孟子",
     "chapter": "孟子",
@@ -14397,17 +13662,6 @@
       "孟子"
     ],
     "char_count": 17
-  },
-  {
-    "id": "c_e6b9299f",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”王曰：“然",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_1a587729",
@@ -16479,17 +15733,6 @@
     "char_count": 8
   },
   {
-    "id": "c_ee151caa",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "曰，奚为后我",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_2fbe101d",
     "book": "孟子",
     "chapter": "孟子",
@@ -16658,17 +15901,6 @@
       "孟子"
     ],
     "char_count": 24
-  },
-  {
-    "id": "c_70d45a45",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "曾子曰：‘戒之戒之",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_6326d1db",
@@ -17009,17 +16241,6 @@
     "char_count": 9
   },
   {
-    "id": "c_52604adc",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“何哉",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_a6249c17",
     "book": "孟子",
     "chapter": "孟子",
@@ -17053,17 +16274,6 @@
       "孟子"
     ],
     "char_count": 9
-  },
-  {
-    "id": "c_7d472ac4",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”公曰：“诺",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_eaf49080",
@@ -17229,17 +16439,6 @@
       "孟子"
     ],
     "char_count": 21
-  },
-  {
-    "id": "c_2923ba1a",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "或问乎曾西曰",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_e6fbfd82",
@@ -17836,17 +17035,6 @@
       "孟子"
     ],
     "char_count": 7
-  },
-  {
-    "id": "c_e65a305d",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "气，体之充也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_ccea29e3",
@@ -18487,18 +17675,6 @@
       "孟子"
     ],
     "char_count": 12
-  },
-  {
-    "id": "c_d781aa76",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孔子曰：‘里仁为美",
-    "tags": [
-      "仁",
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_32a6c2dc",
@@ -19419,17 +18595,6 @@
     "char_count": 9
   },
   {
-    "id": "c_6bf0aaa8",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "辞曰：‘闻戒",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_66dd56c2",
     "book": "孟子",
     "chapter": "孟子",
@@ -19796,17 +18961,6 @@
     "char_count": 20
   },
   {
-    "id": "c_316fb1d0",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "严，虞不敢请",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_a0715088",
     "book": "孟子",
     "chapter": "孟子",
@@ -19975,17 +19129,6 @@
     "char_count": 12
   },
   {
-    "id": "c_526356e7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“未也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_ff50e890",
     "book": "孟子",
     "chapter": "孟子",
@@ -20117,17 +19260,6 @@
       "孟子"
     ],
     "char_count": 12
-  },
-  {
-    "id": "c_e6b918df",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”王曰：“恶",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_8454633f",
@@ -20335,17 +19467,6 @@
     "char_count": 15
   },
   {
-    "id": "c_4675bdb9",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子致为臣而归",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_53414ca5",
     "book": "孟子",
     "chapter": "孟子",
@@ -20401,17 +19522,6 @@
     "char_count": 11
   },
   {
-    "id": "c_28e5cc2e",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "子盍为我言之",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_d65be5b3",
     "book": "孟子",
     "chapter": "孟子",
@@ -20421,17 +19531,6 @@
       "孟子"
     ],
     "char_count": 22
-  },
-  {
-    "id": "c_6a930066",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子曰：“然",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_22965598",
@@ -20543,17 +19642,6 @@
       "孟子"
     ],
     "char_count": 10
-  },
-  {
-    "id": "c_423f110a",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子去齐，宿于昼",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_56e30bcd",
@@ -20921,17 +20009,6 @@
     "char_count": 6
   },
   {
-    "id": "c_308d9ad7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子去齐，居休",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_8103b6aa",
     "book": "孟子",
     "chapter": "孟子",
@@ -20941,17 +20018,6 @@
       "孟子"
     ],
     "char_count": 17
-  },
-  {
-    "id": "c_52698d9b",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“非也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_8dbef41d",
@@ -21152,17 +20218,6 @@
     "char_count": 9
   },
   {
-    "id": "c_b3fd1495",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子曰：“不亦善乎",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_d51329f4",
     "book": "孟子",
     "chapter": "孟子",
@@ -21345,17 +20400,6 @@
     "char_count": 12
   },
   {
-    "id": "c_6c56a9a7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "歠粥，面深墨",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_e76d2dbb",
     "book": "孟子",
     "chapter": "孟子",
@@ -21410,17 +20454,6 @@
     "tags": [
       "儒家",
       "天气",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_6d3a3d7d",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "世子曰：“然",
-    "tags": [
-      "儒家",
       "孟子"
     ],
     "char_count": 6
@@ -21938,28 +20971,6 @@
     "book": "孟子",
     "chapter": "孟子",
     "quote": "”“许子冠乎",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_52619258",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“奚冠",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_5260bede",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“冠素",
     "tags": [
       "儒家",
       "孟子"
@@ -23144,17 +22155,6 @@
     "char_count": 12
   },
   {
-    "id": "c_5269d0b4",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“食志",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_3caf5473",
     "book": "孟子",
     "chapter": "孟子",
@@ -23944,18 +22944,6 @@
       "孟子"
     ],
     "char_count": 28
-  },
-  {
-    "id": "c_1bcecde",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孔子惧，作春秋",
-    "tags": [
-      "儒家",
-      "四季",
-      "孟子"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_81215de5",
@@ -26015,17 +25003,6 @@
     "char_count": 12
   },
   {
-    "id": "c_b477adec",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子曰：“事孰为大",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_6217be4e",
     "book": "孟子",
     "chapter": "孟子",
@@ -26272,17 +25249,6 @@
       "孟子"
     ],
     "char_count": 9
-  },
-  {
-    "id": "c_52634ac6",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“昔昔",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_700b7a02",
@@ -28216,28 +27182,6 @@
       "孟子"
     ],
     "char_count": 13
-  },
-  {
-    "id": "c_53d247c1",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "曾子，师也，父兄也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
-  },
-  {
-    "id": "c_242ad6af",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "子思，臣也，微也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 8
   },
   {
     "id": "c_a7c80c8f",
@@ -30380,17 +29324,6 @@
     "char_count": 18
   },
   {
-    "id": "c_6e316487",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孔子曰：‘有命",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_83bdabe7",
     "book": "孟子",
     "chapter": "孟子",
@@ -30863,28 +29796,6 @@
     "char_count": 9
   },
   {
-    "id": "c_3fb2f1f3",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孔子，圣之时者也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 8
-  },
-  {
-    "id": "c_731f355a",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孔子之谓集大成",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_93d57677",
     "book": "孟子",
     "chapter": "孟子",
@@ -30938,28 +29849,6 @@
       "孟子"
     ],
     "char_count": 9
-  },
-  {
-    "id": "c_f65adc2c",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "智，譬则巧也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_2e0729a9",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "圣，譬则力也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_98bb61ec",
@@ -31462,17 +30351,6 @@
     "char_count": 25
   },
   {
-    "id": "c_52601fba",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“不可",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_476f8e3c",
     "book": "孟子",
     "chapter": "孟子",
@@ -31832,17 +30710,6 @@
     "char_count": 15
   },
   {
-    "id": "c_5260d920",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“受之",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_650011f3",
     "book": "孟子",
     "chapter": "孟子",
@@ -32133,18 +31000,6 @@
       "孟子"
     ],
     "char_count": 9
-  },
-  {
-    "id": "c_a5115b5d",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "往见，不义也",
-    "tags": [
-      "义",
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_674d9d75",
@@ -32492,17 +31347,6 @@
     "char_count": 9
   },
   {
-    "id": "c_52601fd7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“不同",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_75272551",
     "book": "孟子",
     "chapter": "孟子",
@@ -32540,17 +31384,6 @@
     "book": "孟子",
     "chapter": "孟子",
     "quote": "”王勃然变乎色",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
-    "id": "c_d9fc1acc",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "曰：“王勿异也",
     "tags": [
       "儒家",
       "孟子"
@@ -32600,18 +31433,6 @@
       "孟子"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_7b1413e0",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "义，犹桮桊也",
-    "tags": [
-      "义",
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_5ad46812",
@@ -33048,17 +31869,6 @@
     "char_count": 14
   },
   {
-    "id": "c_5263204e",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“敬兄",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_1556eae2",
     "book": "孟子",
     "chapter": "孟子",
@@ -33102,17 +31912,6 @@
       "孟子"
     ],
     "char_count": 12
-  },
-  {
-    "id": "c_c0e79f34",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子曰：“敬叔父乎",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_421bd314",
@@ -33725,18 +32524,6 @@
     "char_count": 8
   },
   {
-    "id": "c_b7c83fc7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "谓理也，义也",
-    "tags": [
-      "义",
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_2c0ab96b",
     "book": "孟子",
     "chapter": "孟子",
@@ -34295,18 +33082,6 @@
       "孟子"
     ],
     "char_count": 7
-  },
-  {
-    "id": "c_a0f92db9",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "孟子曰：“仁，人心也",
-    "tags": [
-      "仁",
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 10
   },
   {
     "id": "c_b93e21d9",
@@ -34923,18 +33698,6 @@
     "char_count": 15
   },
   {
-    "id": "c_5265eea7",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "”曰：“礼重",
-    "tags": [
-      "儒家",
-      "孟子",
-      "礼"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_b0eed80d",
     "book": "孟子",
     "chapter": "孟子",
@@ -35338,17 +34101,6 @@
     "char_count": 20
   },
   {
-    "id": "c_5a72b596",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "无他，疏之也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_f4074c70",
     "book": "孟子",
     "chapter": "孟子",
@@ -35358,17 +34110,6 @@
       "孟子"
     ],
     "char_count": 16
-  },
-  {
-    "id": "c_5a1ff0e1",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "无他，戚之也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_b11b9a0d",
@@ -35448,18 +34189,6 @@
       "孟子"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_ca066447",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "愈疏，不孝也",
-    "tags": [
-      "儒家",
-      "孝",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_21a4b4a8",
@@ -38263,28 +36992,6 @@
     "char_count": 11
   },
   {
-    "id": "c_92962346",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "汤武，身之也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_1fb740e4",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "五霸，假之也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_de1f88d5",
     "book": "孟子",
     "chapter": "孟子",
@@ -38958,17 +37665,6 @@
     "char_count": 17
   },
   {
-    "id": "c_130f4448",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "而不答，何也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_9c60e334",
     "book": "孟子",
     "chapter": "孟子",
@@ -39291,17 +37987,6 @@
     "char_count": 15
   },
   {
-    "id": "c_cb416070",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "曰：‘奚为后我",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 7
-  },
-  {
     "id": "c_8080208e",
     "book": "孟子",
     "chapter": "孟子",
@@ -39311,17 +37996,6 @@
       "孟子"
     ],
     "char_count": 19
-  },
-  {
-    "id": "c_ef26ea77",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "王曰：‘无畏",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_5a4bf015",
@@ -40319,17 +38993,6 @@
       "孟子"
     ],
     "char_count": 11
-  },
-  {
-    "id": "c_919bb8e8",
-    "book": "孟子",
-    "chapter": "孟子",
-    "quote": "汤武，反之也",
-    "tags": [
-      "儒家",
-      "孟子"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_d6237798",
@@ -117987,28 +116650,6 @@
     "char_count": 8
   },
   {
-    "id": "c_113a0357",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "曰：「将之卫",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_112ec118",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "曰：「奚为焉",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_33bb9de8",
     "book": "庄子",
     "chapter": "庄子",
@@ -118515,17 +117156,6 @@
       "道家"
     ],
     "char_count": 17
-  },
-  {
-    "id": "c_b7adb61f",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "仲尼曰：「恶",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_cd2d4f02",
@@ -119438,29 +118068,6 @@
     "char_count": 7
   },
   {
-    "id": "c_45d7412a",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "有亲，非仁也",
-    "tags": [
-      "仁",
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
-  },
-  {
-    "id": "c_8d4dab51",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "天时，非贤也",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_c26964dc",
     "book": "庄子",
     "chapter": "庄子",
@@ -119471,17 +118078,6 @@
       "道家"
     ],
     "char_count": 9
-  },
-  {
-    "id": "c_3d482e92",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "行名，非士也",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_e13552f9",
@@ -119901,17 +118497,6 @@
       "道家"
     ],
     "char_count": 27
-  },
-  {
-    "id": "c_e2d5a183",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "而曾、史是已",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_1a5c5192",
@@ -121336,17 +119921,6 @@
       "道家"
     ],
     "char_count": 10
-  },
-  {
-    "id": "c_9c6266ef",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "知可否，知也",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_59216f17",
@@ -123298,17 +121872,6 @@
       "道家"
     ],
     "char_count": 27
-  },
-  {
-    "id": "c_44e670ed",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "隐，故不自隐",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_ba67159e",
@@ -125809,17 +124372,6 @@
     "char_count": 9
   },
   {
-    "id": "c_f8f1e589",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "庄子曰：「诺",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
-  },
-  {
     "id": "c_5ed0b2d2",
     "book": "庄子",
     "chapter": "庄子",
@@ -125840,17 +124392,6 @@
       "道家"
     ],
     "char_count": 13
-  },
-  {
-    "id": "c_9f06cabf",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "庄子曰：「请治剑服",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 9
   },
   {
     "id": "c_57ba1e76",
@@ -125965,17 +124506,6 @@
     "char_count": 11
   },
   {
-    "id": "c_8a4e943d",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "庄子曰：「望之久矣",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 9
-  },
-  {
     "id": "c_4b71c9c7",
     "book": "庄子",
     "chapter": "庄子",
@@ -126007,17 +124537,6 @@
       "道家"
     ],
     "char_count": 17
-  },
-  {
-    "id": "c_11597766",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "曰：「愿闻剑",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 6
   },
   {
     "id": "c_6d50671",
@@ -126341,17 +124860,6 @@
       "道家"
     ],
     "char_count": 10
-  },
-  {
-    "id": "c_3de1149e",
-    "book": "庄子",
-    "chapter": "庄子",
-    "quote": "曰：「无乎不在",
-    "tags": [
-      "庄子",
-      "道家"
-    ],
-    "char_count": 7
   },
   {
     "id": "c_26c3e5c2",
