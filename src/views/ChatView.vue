@@ -1,5 +1,5 @@
 <template>
-  <div class="app-container chat-view">
+  <div class="app-container chat-view" :style="chatViewStyle">
 
     <div v-if="!ready" class="loading-state">
       <p>正在加载典籍库…</p>
@@ -27,6 +27,7 @@
 
     <!-- 输入区 -->
     <section
+      ref="inputAreaEl"
       class="ink-card input-area ink-spread-in"
       :class="{ collapsed: !atBottom }"
       :title="atBottom ? '' : '点击展开输入框'"
@@ -59,7 +60,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import { ref, computed, onMounted, onBeforeUnmount, nextTick } from 'vue'
 import { chatApi } from '@/api'
 import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
@@ -71,6 +72,12 @@ const messages = ref([])
 const ready = ref(false)
 // 距底部 ≤ 80px 视为在底部；否则收起输入框
 const atBottom = ref(true)
+// 测量输入框实际高度，用于动态计算 chat-view 底部 padding
+const inputAreaEl = ref(null)
+const inputHeight = ref(120)
+let resizeObs = null
+// 让最后一条聊天记录能被多滚动"半个聊天框"高度，留出操作空间
+const HALF_CARD_EXTRA = 160
 
 const { load: loadClassics } = useClassics()
 
@@ -79,6 +86,11 @@ const formatTime = (iso) => {
   const d = new Date(iso)
   return `${d.getHours().toString().padStart(2, '0')}:${d.getMinutes().toString().padStart(2, '0')}`
 }
+
+// chat-view 底部动态 padding：输入框距离视口底部 24px + 输入框高度 + 半张回复卡的额外滚动空间
+const chatViewStyle = computed(() => ({
+  paddingBottom: `${Math.ceil(inputHeight.value + 24 + HALF_CARD_EXTRA)}px`,
+}))
 
 const scrollToBottom = () => {
   nextTick(() => {
@@ -161,17 +173,29 @@ const onDelete = (msg) => {
   messages.value = messages.value.filter((m) => m.id !== msg.id)
 }
 
+const setupInputObserver = () => {
+  if (!inputAreaEl.value || typeof ResizeObserver === 'undefined') return
+  resizeObs = new ResizeObserver(([entry]) => {
+    inputHeight.value = entry.contentRect.height
+    // 高度变化时若用户原已"在底部"，把视口推回新底部
+    if (atBottom.value) scrollToBottom()
+  })
+  resizeObs.observe(inputAreaEl.value)
+}
+
 onMounted(async () => {
   await loadClassics()
   ready.value = true
   window.addEventListener('scroll', updateAtBottom, { passive: true })
   window.addEventListener('resize', updateAtBottom)
+  setupInputObserver()
   updateAtBottom()
 })
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', updateAtBottom)
   window.removeEventListener('resize', updateAtBottom)
+  resizeObs?.disconnect()
 })
 </script>
 
