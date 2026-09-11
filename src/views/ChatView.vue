@@ -5,6 +5,7 @@
     <header class="page-header ink-spread-in">
       <h2 class="page-title">此时 · 此刻</h2>
       <p class="page-subtitle">写下你此刻的心境，典籍自有回应。</p>
+      <BrushPoetry />
     </header>
 
     <div v-if="!ready" class="loading-state">
@@ -76,6 +77,7 @@ import { historyStore } from '@/lib/store'
 import { useClassics } from '@/composables/useClassics'
 import ReplyCard from '@/components/ReplyCard.vue'
 import MountainDeco from '@/components/MountainDeco.vue'
+import BrushPoetry from '@/components/BrushPoetry.vue'
 
 const content = ref('')
 const loading = ref(false)
