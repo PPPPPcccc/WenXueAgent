@@ -21,14 +21,24 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 
-// 全部经过 LiuJianMaoCao 子集字体覆盖验证
+// 全部经过 LiuJianMaoCao 子集字体覆盖验证；每对为同一首诗的上下句
 const POEMS = [
-  '月落乌啼霜满天', '江枫渔火对愁眠', '孤帆远影碧空尽', '惟见长江天际流',
-  '春风又绿江南岸', '明月何时照我还', '江畔何人初见月', '江月何年初照人',
-  '人生若只如初见', '此心安处是吾乡', '一蓑烟雨任平生', '大江东去浪淘尽',
-  '千古风流人物', '行到水穷处', '坐看云起时', '落霞与孤鹜齐飞',
-  '秋水共长天一色', '云山墨月风清远静', '月明如水照书人', '墨淡意自深',
-  '心如止水月如霜', '墨色千年月一轮', '山色有无中', '山间明月江上风',
+  ['月落乌啼霜满天', '江枫渔火对愁眠'],         // 张继·枫桥夜泊
+  ['孤帆远影碧空尽', '惟见长江天际流'],         // 李白·黄鹤楼送孟浩然
+  ['春风又绿江南岸', '明月何时照我还'],         // 王安石·泊船瓜洲
+  ['江畔何人初见月', '江月何年初照人'],         // 张若虚·春江花月夜
+  ['人生若只如初见', '何事秋风悲画扇'],         // 纳兰性德·木兰花令
+  ['行到水穷处', '坐看云起时'],                  // 王维·终南别业
+  ['一蓑烟雨任平生', '也无风雨也无晴'],         // 苏轼·定风波
+  ['落霞与孤鹜齐飞', '秋水共长天一色'],         // 王勃·滕王阁序
+  ['大江东去浪淘尽', '千古风流人物'],            // 苏轼·念奴娇·赤壁怀古
+  ['无边落木萧萧下', '不尽长江滚滚来'],         // 杜甫·登高
+  ['竹杖芒鞋轻胜马', '谁怕 一蓑烟雨任平生'],   // 苏轼·定风波
+  ['此心安处是吾乡', '归去 也无风雨也无晴'],    // 苏轼·定风波
+  ['云山墨月风清远静', '月明如水照书人'],        // 云山墨月·自撰
+  ['墨淡意自深', '心如止水月如霜'],              // 自撰
+  ['墨色千年月一轮', '山色有无中'],              // 自撰
+  ['山间明月江上风', '落霞与孤鹜齐飞'],          // 自撰
 ]
 
 const line1 = ref('')
@@ -40,12 +50,10 @@ const line2El = ref(null)
 let tilt = 0
 let cancelled = false
 
-// 抽取两句不重复的诗
+// 随机抽取一对（同一首诗的上下句）
 function pickPair() {
-  const pool = POEMS.slice()
-  const a = pool.splice(Math.floor(Math.random() * pool.length), 1)[0]
-  const b = pool[Math.floor(Math.random() * pool.length)]
-  return [a, b]
+  const pair = POEMS[Math.floor(Math.random() * POEMS.length)]
+  return [pair[0], pair[1]]
 }
 
 // 等待新 DOM 挂载完成（在 :key 变更后下一帧）
@@ -142,8 +150,8 @@ async function cycle() {
 onMounted(() => {
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   if (reduce) {
-    line1.value = POEMS[0]
-    line2.value = POEMS[1]
+    line1.value = POEMS[0][0]
+    line2.value = POEMS[0][1]
     key1.value++
     key2.value++
     return
