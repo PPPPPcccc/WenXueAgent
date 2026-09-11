@@ -30,7 +30,7 @@
       <textarea
         v-model="content"
         placeholder="把你的心情写下来……"
-        rows="3"
+        rows="2"
         maxlength="500"
         class="ink-textarea chat-input"
         :disabled="!ready"
@@ -201,14 +201,16 @@ onMounted(async () => {
 .input-area {
   position: fixed;
   bottom: 24px;
-  left: 25%;
-  right: 25%;
-  width: 50%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 48px);
+  max-width: 720px;
   z-index: 3;
   background: var(--paper-light);
   backdrop-filter: blur(8px);
   border: 1px solid var(--ink-10);
   box-shadow: 0 -4px 24px rgba(26, 26, 26, 0.08);
+  padding: 10px 16px;
 }
 
 .chat-input {
@@ -227,7 +229,7 @@ onMounted(async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 12px;
+  margin-top: 6px;
 }
 
 .char-counter {

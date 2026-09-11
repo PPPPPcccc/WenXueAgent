@@ -46,7 +46,7 @@ import InkRipples from '@/components/InkRipples.vue'
   right: 0;
   z-index: 1;
   text-align: center;
-  padding: 120px 24px 0;
+  padding: 360px 24px 0;
   pointer-events: none;
 }
 
@@ -69,7 +69,7 @@ import InkRipples from '@/components/InkRipples.vue'
 @media (max-width: 768px) {
   .bg-title { font-size: 24px; letter-spacing: 0.15em; }
   .bg-subtitle { font-size: 12px; }
-  .bg-header { padding: 104px 24px 0; }
+  .bg-header { padding: 264px 24px 0; }
 }
 
 main {

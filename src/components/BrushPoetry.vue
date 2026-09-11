@@ -1,13 +1,20 @@
 <template>
-  <!-- 狂草 · 随机诗句循环书写：与 MountainDeco 同字体栈 -->
+  <!-- 狂草 · 随机两句循环书写：与 MountainDeco 同字体栈 -->
   <div class="brush-poetry" aria-hidden="true">
-    <div
-      v-if="currentLine"
-      :key="currentKey"
-      ref="lineEl"
-      class="brush-line"
-      :style="{ '--tilt': `${tilt}deg`, '--y': `${y}px` }"
-    >{{ currentLine }}</div>
+    <div class="brush-lines" :style="{ '--tilt': `${tilt}deg` }">
+      <div
+        v-if="line1"
+        :key="key1"
+        ref="line1El"
+        class="brush-line line-top"
+      >{{ line1 }}</div>
+      <div
+        v-if="line2"
+        :key="key2"
+        ref="line2El"
+        class="brush-line line-bottom"
+      >{{ line2 }}</div>
+    </div>
   </div>
 </template>
 
@@ -24,19 +31,21 @@ const POEMS = [
   '心如止水月如霜', '墨色千年月一轮', '山色有无中', '山间明月江上风',
 ]
 
-const currentLine = ref('')
-const currentKey = ref(0)
-const lineEl = ref(null)
+const line1 = ref('')
+const line2 = ref('')
+const key1 = ref(0)
+const key2 = ref(0)
+const line1El = ref(null)
+const line2El = ref(null)
 let tilt = 0
-let y = 0
 let cancelled = false
 
-function pickPoem() {
-  let next = POEMS[Math.floor(Math.random() * POEMS.length)]
-  while (next === currentLine.value) {
-    next = POEMS[Math.floor(Math.random() * POEMS.length)]
-  }
-  return next
+// 抽取两句不重复的诗
+function pickPair() {
+  const pool = POEMS.slice()
+  const a = pool.splice(Math.floor(Math.random() * pool.length), 1)[0]
+  const b = pool[Math.floor(Math.random() * pool.length)]
+  return [a, b]
 }
 
 // 等待新 DOM 挂载完成（在 :key 变更后下一帧）
@@ -52,27 +61,29 @@ function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms))
 }
 
-async function playLine(line) {
+async function playPair() {
   if (cancelled) return
   // 等 Vue 真正把新元素挂到 DOM 上
   await nextFrame()
-  const el = lineEl.value
-  if (!el || cancelled) return
+  const el1 = line1El.value
+  const el2 = line2El.value
+  if (!el1 || !el2 || cancelled) return
 
-  const FADE_IN  = 360
-  const STROKE   = 1700
-  const HOLD     = 1500
-  const FADE_OUT = 1300
-  const GAP      = 700
+  // 全部时长 ×2，速度减半
+  const FADE_IN  = 720
+  const STROKE   = 3400
+  const STAGGER  = 800
+  const HOLD     = 3000
+  const FADE_OUT = 2600
+  const GAP      = 1400
 
-  // 淡入
-  const a1 = el.animate(
+  // 上句淡入
+  const a1 = el1.animate(
     [{ opacity: 0 }, { opacity: 0.85 }],
     { duration: FADE_IN, fill: 'forwards', easing: 'ease-out' }
   )
-
-  // 笔锋扫过
-  const a2 = el.animate(
+  // 上句笔锋
+  const a2 = el1.animate(
     [
       { clipPath: 'inset(-12% 100% -12% -12%)' },
       { clipPath: 'inset(-12% -12% -12% -12%)' },
@@ -80,11 +91,35 @@ async function playLine(line) {
     { duration: STROKE, fill: 'forwards', easing: 'cubic-bezier(0.45, 0, 0.25, 1)' }
   )
 
+  // 等 STAGGER 时间后，下句跟上
+  await sleep(STAGGER)
+  if (cancelled) return
+
+  const el2Now = line2El.value
+  if (!el2Now || cancelled) return
+
+  const a3 = el2Now.animate(
+    [{ opacity: 0 }, { opacity: 0.85 }],
+    { duration: FADE_IN, fill: 'forwards', easing: 'ease-out' }
+  )
+  const a4 = el2Now.animate(
+    [
+      { clipPath: 'inset(-12% 100% -12% -12%)' },
+      { clipPath: 'inset(-12% -12% -12% -12%)' },
+    ],
+    { duration: STROKE, fill: 'forwards', easing: 'cubic-bezier(0.45, 0, 0.25, 1)' }
+  )
+
+  // 两句都写完后停留
   await sleep(FADE_IN + STROKE + HOLD)
   if (cancelled) return
 
-  // 淡出
-  const a3 = el.animate(
+  // 两句一起淡出
+  const a5 = el1.animate(
+    [{ opacity: 0.85 }, { opacity: 0 }],
+    { duration: FADE_OUT, fill: 'forwards' }
+  )
+  const a6 = el2Now.animate(
     [{ opacity: 0.85 }, { opacity: 0 }],
     { duration: FADE_OUT, fill: 'forwards' }
   )
@@ -94,21 +129,23 @@ async function playLine(line) {
 
 async function cycle() {
   while (!cancelled) {
-    const line = pickPoem()
-    tilt = -3 + Math.random() * 6         // 微旋转 ±3°
-    y = -8 + Math.random() * 16           // 微位移 ±8px
-    currentLine.value = line
-    currentKey.value++                     // 强制 :key 变更 → 新 div 挂载
-    await playLine(line)
+    const [a, b] = pickPair()
+    tilt = -3 + Math.random() * 6
+    line1.value = a
+    line2.value = b
+    key1.value++
+    key2.value++
+    await playPair()
   }
 }
 
 onMounted(() => {
   const reduce = window.matchMedia?.('(prefers-reduced-motion: reduce)').matches
   if (reduce) {
-    // 不动效：只静态显示一句
-    currentLine.value = POEMS[0]
-    currentKey.value++
+    line1.value = POEMS[0]
+    line2.value = POEMS[1]
+    key1.value++
+    key2.value++
     return
   }
   // 进入页面前 1.2s 稍等，让主标题先安定
@@ -123,20 +160,24 @@ onBeforeUnmount(() => { cancelled = true })
 .brush-poetry {
   position: relative;
   width: 100%;
-  height: 80px;
+  height: 160px;
   margin: 14px auto 0;
   overflow: hidden;
   display: block;
 }
 
+.brush-lines {
+  position: absolute;
+  inset: 0;
+}
+
 .brush-line {
   position: absolute;
-  left: 0; right: 0;
-  top: 50%;
-  transform: translateY(-50%) rotate(var(--tilt, 0deg)) translateY(var(--y, 0px));
+  left: 0;
+  right: 0;
   font-family: "Liu Jian Mao Cao","Long Cang","Ma Shan Zheng","ZCOOL XiaoWei", cursive;
   font-weight: 400;
-  font-size: 42px;
+  font-size: 38px;
   color: #1a1610;
   letter-spacing: 0.06em;
   line-height: 1;
@@ -149,8 +190,18 @@ onBeforeUnmount(() => { cancelled = true })
   will-change: opacity, clip-path;
 }
 
+.line-top {
+  top: 28%;
+  transform: translateY(-50%) rotate(var(--tilt, 0deg));
+}
+
+.line-bottom {
+  top: 72%;
+  transform: translateY(-50%) rotate(calc(var(--tilt, 0deg) * -0.7));
+}
+
 @media (max-width: 768px) {
-  .brush-poetry { height: 62px; margin-top: 10px; }
-  .brush-line   { font-size: 30px; }
+  .brush-poetry { height: 120px; margin-top: 10px; }
+  .brush-line   { font-size: 26px; }
 }
 </style>
