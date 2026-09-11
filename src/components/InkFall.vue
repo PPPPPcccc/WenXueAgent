@@ -51,6 +51,7 @@ function initCanvas() {
   h = rect.height
   canvasRef.value.width = Math.floor(w * dpr)
   canvasRef.value.height = Math.floor(h * dpr)
+  ctx = canvasRef.value.getContext('2d')      // ← 之前漏了这行
   ctx.setTransform(dpr, 0, 0, dpr, 0, 0)
 }
 
