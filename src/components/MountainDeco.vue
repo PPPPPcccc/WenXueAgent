@@ -120,16 +120,14 @@ function rot(i) {
   font-size: 80px;
   line-height: 1;
   color: #18100a;
-  /* 初始：灰色、被右裁（未写） */
+  /* 始终完整显示，灰色底稿通过 opacity: 0.08 常驻 */
   opacity: 0.08;
-  clip-path: inset(-12% 100% -12% -12%);
   transform: rotate(var(--rot));
   user-select: none;
   filter: blur(0.3px);
-  animation: writeHoldFade 96s var(--ease) infinite both;
+  animation: writeHoldFade 32s var(--ease) infinite both;
 }
 
-/* 每字用专属 keyframe，错开书写时机；所有字在 33% 写完，一起 hold，再一起淡回灰色 */
 .ink-char:nth-child(1) { justify-content: flex-end; padding-right: 6%; animation-name: writeChar1; }
 .ink-char:nth-child(2) { justify-content: center;  animation-name: writeChar2; }
 .ink-char:nth-child(3) { justify-content: center;  animation-name: writeChar3; }
@@ -139,67 +137,66 @@ function rot(i) {
 .ink-char:nth-child(7) { justify-content: center;  animation-name: writeChar7; }
 .ink-char:nth-child(8) { justify-content: flex-start; padding-left: 6%; animation-name: writeChar8; }
 
-/* 书写阶段占总时长的 33%（~32s），1/8 速度（原本 4s → 32s）
-   淡化回灰色：85%→100%（~14.4s） */
+/* 32s ×3速：书写 0–33%（~10.5s），深黑停留 33–70%，淡回灰色 70–85%，等待循环 85–100% */
 @keyframes writeChar1 {
-  0%   { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  5%   { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%  { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%  { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100% { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%   { opacity: 0.08; }
+  5%   { opacity: 1;    }
+  70%  { opacity: 1;    }
+  85%  { opacity: 0.08; }
+  100% { opacity: 0.08; }
 }
 @keyframes writeChar2 {
-  0%, 4% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  9%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%   { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 4% { opacity: 0.08; }
+  9%     { opacity: 1;    }
+  70%    { opacity: 1;    }
+  85%    { opacity: 0.08; }
+  100%   { opacity: 0.08; }
 }
 @keyframes writeChar3 {
-  0%, 8% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  13%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%    { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%   { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 8% { opacity: 0.08; }
+  13%    { opacity: 1;    }
+  70%    { opacity: 1;    }
+  85%    { opacity: 0.08; }
+  100%   { opacity: 0.08; }
 }
 @keyframes writeChar4 {
-  0%, 12% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  17%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%     { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 12% { opacity: 0.08; }
+  17%     { opacity: 1;    }
+  70%     { opacity: 1;    }
+  85%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar5 {
-  0%, 16% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  21%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%     { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 16% { opacity: 0.08; }
+  21%     { opacity: 1;    }
+  70%     { opacity: 1;    }
+  85%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar6 {
-  0%, 20% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  25%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%     { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 20% { opacity: 0.08; }
+  25%     { opacity: 1;    }
+  70%     { opacity: 1;    }
+  85%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar7 {
-  0%, 24% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  29%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%     { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 24% { opacity: 0.08; }
+  29%     { opacity: 1;    }
+  70%     { opacity: 1;    }
+  85%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 @keyframes writeChar8 {
-  0%, 28% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
-  33%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  70%     { opacity: 1;    clip-path: inset(-12% -12% -12% -12%); }
-  85%     { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
-  100%    { opacity: 0.08; clip-path: inset(-12% -12% -12% -12%); }
+  0%, 28% { opacity: 0.08; }
+  33%     { opacity: 1;    }
+  70%     { opacity: 1;    }
+  85%     { opacity: 0.08; }
+  100%    { opacity: 0.08; }
 }
 
 @keyframes writeHoldFade {
-  0%, 100% { opacity: 0.08; clip-path: inset(-12% 100% -12% -12%); }
+  0%, 100% { opacity: 0.08; }
 }
 
 /* ---- 远山 ---- */
